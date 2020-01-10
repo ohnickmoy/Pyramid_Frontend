@@ -1,30 +1,32 @@
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 import { StyleSheet, Text, View, TouchableOpacity, FlatList } from 'react-native'
 
 const TEST_API = 'http://localhost:3000/api/v1/users/1'
 
+class WorkoutHistory extends React.Component{
+
+    convertDate = (date) => {
+        dateItems = date.split('T')
+        return dateItems[0]
+    }
 
 
-function WorkoutHistory(){
-    const [workouts, setWorkouts] = useState([])
 
-    useEffect(() => {
-        fetch(TEST_API)
-        .then(response => response.json())
-        .then(data => setWorkouts(data.data.attributes.workouts))
-    }, [])
-    return (
-        <View>
-            <Text style={styles.headerText}>Workouts</Text>
-            <FlatList 
-                data={workouts}
-                renderItem={({item}) => (
-                    <Text style={styles.item}>{item.routine_type}</Text>
-                )}
-            />
-        </View>
-    )
-
+    render(){
+        return (
+            <View>
+                <Text style={styles.headerText}>Workouts</Text>
+                <FlatList 
+                    data={this.props.workoutHistory}
+                    renderItem={({item}) => (
+                        <TouchableOpacity style={styles.item}>
+                            <Text>{this.convertDate(item.workout_date)}</Text>
+                        </TouchableOpacity>
+                    )}
+                />
+            </View>
+        )
+    }
 }
 
 export default WorkoutHistory
@@ -32,11 +34,13 @@ export default WorkoutHistory
 const styles = StyleSheet.create({
     headerText: {
         fontSize: 20,
-        fontWeight: 'bold'
+        fontWeight: 'bold',
+        textAlign: 'center',
+        marginBottom: 10
     },
     item: {
         marginTop: 10,
-        padding: 30, 
+        padding: 10, 
         fontSize: 14,
         borderRadius: 3,
         backgroundColor: '#fff',
