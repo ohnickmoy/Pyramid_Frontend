@@ -14,7 +14,8 @@ class WorkoutHistory extends React.Component{
         fetch(TEST_API)
         .then(response => response.json())
         .then(data => {
-            this.setState({workoutHistory: data.data.attributes.workouts})
+            let workouts = data.data.attributes.workouts.reverse()
+            this.setState({workoutHistory: workouts})
         })
     }
 
@@ -29,6 +30,7 @@ class WorkoutHistory extends React.Component{
 
     render(){
         let navigation = this.props.navigation
+        console.log(this.state.workoutHistory)
         return (
             <View style={styles.container}>
                 <FlatList 
@@ -39,6 +41,7 @@ class WorkoutHistory extends React.Component{
                             <Text style={styles.cardText}>Workout Type: {item.routine_type}</Text>
                         </TouchableOpacity>
                     )}
+                    keyExtractor={(item) => item.id.toString() + "WH"}
                 />
             </View>
         )
@@ -51,13 +54,7 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: '#fafafa',
-        padding: 10,
-    },
-    headerText: {
-        fontSize: 20,
-        fontWeight: 'bold',
-        textAlign: 'center',
-        marginBottom: 10,
+        marginHorizontal: 10
     },
     item: {
         marginTop: 10,

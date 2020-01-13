@@ -1,31 +1,57 @@
 import React from  'react';
 import { StyleSheet, View, Text, FlatList } from 'react-native';
+import Card from '../Components/Card'
 
-const convertDate = (date) => {
-    dateItems = date.split('T')
-    return dateItems[0]
+class WorkoutDetails extends React.Component{
+
+    state = {
+        workoutInfo: this.props.navigation.state.params
+    }
+
+    convertDate = (date) => {
+        dateItems = date.split('T')
+        return dateItems[0]
+    }
+    
+    onSetPress = (index, reps, id) => {
+        let exercise = this.state.workoutInfo.exercises.find(exercise => exercise.id === id)
+        //console.log(exercise.setInfo[index])
+        let newValue
+        let v  = exercise.setInfo[index]
+        if (v === ''){
+            newValue = reps
+        }
+        else if(v === 0){
+            newValue === ''
+        }
+        else{
+            newValue = v - 1
+        }
+    }
+
+    render(){
+        let {navigation} = this.props
+        //console.log(this.state)
+        return (
+            <View style={styles.container}>
+                <Text style={styles.headerText}>{this.convertDate(navigation.getParam('workout_date'))}</Text>
+                <FlatList 
+                    data={navigation.getParam('exercises')}
+                    renderItem={({item}) => (
+                        <Card exerciseData={item} onSetPress={this.onSetPress}/>
+                    )}
+                    keyExtractor={(item) => item.id.toString() + 'WD'}
+                    />
+            </View>
+        )
+    }
 }
 
-export default function WorkoutDetails({ navigation }){
-    return (
-        <View style={StyleSheet.container}>
-            <Text style={styles.headerText}>{convertDate(navigation.getParam('workout_date'))}</Text>
-            <FlatList 
-                data={navigation.getParam('exercises')}
-                renderItem={({item}) => (
-                    <View style={styles.exerciseDetails}>
-                        <Text>{item.name}</Text>
-                        <Text>{item.numSets} x {item.reps}</Text>
-                    </View>
-                )}
-                />
-        </View>
-    )
-}
+export default WorkoutDetails
 
 const styles = StyleSheet.create({
     container:{
-        padding: 24
+        margin: 10
     },
     headerText: {
         fontWeight: 'bold',
@@ -33,10 +59,4 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         paddingTop: 10
     },
-    exerciseDetails: {
-        flexDirection: 'row',
-        justifyContent: "space-between",
-        fontSize: 30,
-        padding: 10
-    }
 })
