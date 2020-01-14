@@ -15,7 +15,7 @@ export default function Card(props) {
                 {exerciseData.setInfo.map((set, index) => {
                     if (set === '') {
                         return (
-                            <TouchableOpacity onPress={() => props.onSetPress(index)} style={styles.circle} key={set + index}/>
+                            <TouchableOpacity onPress={() => props.onSetPress(index, exerciseData.reps, exerciseData.id)} style={[styles.circle, styles.gray]} key={set + index}/>
                         )
                     }
                     return (

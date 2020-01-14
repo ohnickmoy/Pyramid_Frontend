@@ -1,26 +1,18 @@
 import React from 'react'
 import { StyleSheet, Text, View, TouchableOpacity, FlatList } from 'react-native'
-import Card from '../Components/Card'
+import { fetchWorkouts, setDisplayedWorkout } from '../actions/workoutActions'
+import { connect } from 'react-redux'
 
-const TEST_API = 'http://localhost:3000/api/v1/users/1'
 
 class WorkoutHistory extends React.Component{
-    state = {
-        workoutHistory: [],
-        user: null
-    }
     
     componentDidMount(){
-        fetch(TEST_API)
-        .then(response => response.json())
-        .then(data => {
-            let workouts = data.data.attributes.workouts.reverse()
-            this.setState({workoutHistory: workouts})
-        })
+        this.props.fetchWorkouts()
     }
 
-    goToDetails = (navigation, item) => {
-        navigation.navigate('Workout Details', item)
+    goToDetails = (navigation, id) => {
+        this.props.setDisplayedWorkout(id)
+        navigation.navigate('Workout Details')
     }
 
     convertDate = (date) => {
@@ -28,15 +20,37 @@ class WorkoutHistory extends React.Component{
         return dateItems[0]
     }
 
+    onSetPress = (index, reps, exerciseId) => {
+        // let newWorkoutHistory = [...this.state.workoutHistory]
+        // let workoutIndex = newWorkoutHistory.findIndex(workout => workout.id === workoutId)
+
+        // let exercise = newWorkoutHistory[workoutIndex].exercises.find(exercise => exercise.id === exerciseId)
+        // let exerciseIndex = newWorkoutHistory[workoutIndex].exercises.findIndex(exercise => exercise.id === exerciseId)
+
+        // let newValue = 0
+        // let v  = exercise.setInfo[index]
+        // if (v === ''){
+        //     newValue = reps
+        // }
+        // else if(v === 0){
+        //     newValue === ''
+        // }
+        // else{
+        //     newWorkoutHistory[workoutIndex].exercises[exerciseIndex].setInfo[index] = newValue = parseInt(v) - 1
+        // }
+    }
+
     render(){
-        let navigation = this.props.navigation
-        console.log(this.state.workoutHistory)
+        const {loading, workoutHistory, navigation} = this.props
+        if(loading){
+            return <Text>Loading...</Text>
+        }
         return (
             <View style={styles.container}>
                 <FlatList 
-                    data={this.state.workoutHistory}
+                    data={workoutHistory}
                     renderItem={({item}) => (
-                        <TouchableOpacity style={styles.item} activeOpacity={1} onPress={() => this.goToDetails(navigation, item)}>
+                        <TouchableOpacity style={styles.item} activeOpacity={1} onPress={() => this.goToDetails(navigation, item.id)}>
                             <Text style={styles.cardText}>{this.convertDate(item.workout_date)}</Text>
                             <Text style={styles.cardText}>Workout Type: {item.routine_type}</Text>
                         </TouchableOpacity>
@@ -48,7 +62,19 @@ class WorkoutHistory extends React.Component{
     }
 }
 
-export default WorkoutHistory
+function mapStateToProps(state){
+    return{
+        workoutHistory: state.workoutHistory,
+        loading: state.loading
+    }
+}
+
+const mapDispatchToProps = {
+    fetchWorkouts,
+    setDisplayedWorkout
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(WorkoutHistory)
 
 const styles = StyleSheet.create({
     container: {

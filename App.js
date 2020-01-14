@@ -1,13 +1,17 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
-import WorkoutHistory from './src/Screens/WorkoutHistory';
 import Navigator from './src/routes/homeStack'
+import { createStore, applyMiddleware } from 'redux'
+import { Provider } from 'react-redux'
+import thunk from 'redux-thunk'
+import workoutReducer from './src/reducers/WorkoutReducer'
 
-const TEST_API = 'http://localhost:3000/api/v1/users/1'
+const store = createStore(workoutReducer, applyMiddleware(thunk))
 
 export default function App() {
   return (
-    <Navigator />
+    <Provider store={store}>
+      <Navigator />
+    </Provider>
   )
 }
 

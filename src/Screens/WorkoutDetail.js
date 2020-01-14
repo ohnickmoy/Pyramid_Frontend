@@ -1,53 +1,47 @@
 import React from  'react';
 import { StyleSheet, View, Text, FlatList } from 'react-native';
 import Card from '../Components/Card'
+import { connect } from 'react-redux'
+import { updateSetsReps } from '../actions/workoutActions'
 
 class WorkoutDetails extends React.Component{
-
-    state = {
-        workoutInfo: this.props.navigation.state.params
-    }
 
     convertDate = (date) => {
         dateItems = date.split('T')
         return dateItems[0]
     }
-    
-    onSetPress = (index, reps, id) => {
-        let exercise = this.state.workoutInfo.exercises.find(exercise => exercise.id === id)
-        //console.log(exercise.setInfo[index])
-        let newValue
-        let v  = exercise.setInfo[index]
-        if (v === ''){
-            newValue = reps
-        }
-        else if(v === 0){
-            newValue === ''
-        }
-        else{
-            newValue = v - 1
-        }
+
+    onSetPress = (exerciseSetIndex, reps, exerciseId) => {
+        this.props.updateSetsReps(exerciseSetIndex, reps, exerciseId)
     }
 
     render(){
-        let {navigation} = this.props
-        //console.log(this.state)
+        const {selectedWorkout} = this.props
         return (
             <View style={styles.container}>
-                <Text style={styles.headerText}>{this.convertDate(navigation.getParam('workout_date'))}</Text>
+            <Text style={styles.headerText}>{this.convertDate(selectedWorkout.workout_date)}</Text>
                 <FlatList 
-                    data={navigation.getParam('exercises')}
+                    data={selectedWorkout.exercises}
                     renderItem={({item}) => (
-                        <Card exerciseData={item} onSetPress={this.onSetPress}/>
+                        <Card workoutId={selectedWorkout.id} exerciseData={item} onSetPress={this.onSetPress}/>
                     )}
-                    keyExtractor={(item) => item.id.toString() + 'WD'}
-                    />
+                    keyExtractor={(item) => item.id.toString() + 'WD'}/>
             </View>
         )
     }
 }
 
-export default WorkoutDetails
+function mapStateToProps(state){
+    return {
+        selectedWorkout: state.selectedWorkout
+    }
+}
+
+const mapDispatchToProps = {
+    updateSetsReps
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(WorkoutDetails)
 
 const styles = StyleSheet.create({
     container:{
