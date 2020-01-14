@@ -33,6 +33,11 @@ function workoutReducer(prevState = init_state, action){
             const {workoutHistory} = prevState
             let displayedWorkout = workoutHistory.find(workout => workout.id === action.payload.workoutId)
             return {...prevState, selectedWorkout: displayedWorkout}
+        case 'SAVE_WORKOUT':
+            let updatedWorkoutHistory = [...prevState.workoutHistory]
+            let workoutIndex = updatedWorkoutHistory.findIndex(workout => workout.id === prevState.selectedWorkout.id)
+            updatedWorkoutHistory[workoutIndex] = {...prevState.selectedWorkout}
+            return {...prevState, workoutHistory: updatedWorkoutHistory}
         default:
             return prevState
     }

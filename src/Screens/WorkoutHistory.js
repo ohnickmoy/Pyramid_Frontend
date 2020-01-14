@@ -20,30 +20,10 @@ class WorkoutHistory extends React.Component{
         return dateItems[0]
     }
 
-    onSetPress = (index, reps, exerciseId) => {
-        // let newWorkoutHistory = [...this.state.workoutHistory]
-        // let workoutIndex = newWorkoutHistory.findIndex(workout => workout.id === workoutId)
-
-        // let exercise = newWorkoutHistory[workoutIndex].exercises.find(exercise => exercise.id === exerciseId)
-        // let exerciseIndex = newWorkoutHistory[workoutIndex].exercises.findIndex(exercise => exercise.id === exerciseId)
-
-        // let newValue = 0
-        // let v  = exercise.setInfo[index]
-        // if (v === ''){
-        //     newValue = reps
-        // }
-        // else if(v === 0){
-        //     newValue === ''
-        // }
-        // else{
-        //     newWorkoutHistory[workoutIndex].exercises[exerciseIndex].setInfo[index] = newValue = parseInt(v) - 1
-        // }
-    }
-
     render(){
         const {loading, workoutHistory, navigation} = this.props
         if(loading){
-            return <Text>Loading...</Text>
+            return <Text style={styles.headerText}>Loading...</Text>
         }
         return (
             <View style={styles.container}>
@@ -51,8 +31,23 @@ class WorkoutHistory extends React.Component{
                     data={workoutHistory}
                     renderItem={({item}) => (
                         <TouchableOpacity style={styles.item} activeOpacity={1} onPress={() => this.goToDetails(navigation, item.id)}>
-                            <Text style={styles.cardText}>{this.convertDate(item.workout_date)}</Text>
-                            <Text style={styles.cardText}>Workout Type: {item.routine_type}</Text>
+                            <View style={styles.topRow}>
+                                <Text style={styles.cardText}>{this.convertDate(item.workout_date)}</Text>
+                                <Text style={styles.cardText}>Workout Type: {item.routine_type}</Text>
+                            </View>
+                            <View style={styles.bottomRow}>
+                                {item.exercises.map((exercise, index) => {
+                                    return(
+                                        <View style={styles.exerciseRow} key={exercise + index}>
+                                            <Text style={styles.setRepText}>{exercise.name}</Text>
+                                            <View style={styles.setRepData}>
+                                                <Text style={styles.setRepText}>{exercise.tier}: </Text>
+                                                <Text style={styles.setRepText}>{exercise.numSets} x {exercise.reps} - {exercise.weight}lb</Text>
+                                            </View>
+                                        </View>
+                                    )
+                                })}
+                            </View>
                         </TouchableOpacity>
                     )}
                     keyExtractor={(item) => item.id.toString() + "WH"}
@@ -82,6 +77,28 @@ const styles = StyleSheet.create({
         backgroundColor: '#fafafa',
         marginHorizontal: 10
     },
+    topRow: {
+        flexDirection: 'row',
+        justifyContent: 'space-between'        
+    },
+    bottomRow: {
+        flexDirection: 'column',
+        // alignItems: 'center',
+        marginTop: 14,
+        // marginBottom:6,
+        // flexWrap: 'wrap',
+    },
+    exerciseRow: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        fontSize: 16,
+        marginBottom: 5
+    },
+    setRepData: {
+        flexDirection: 'row',
+        justifyContent: 'space-evenly'
+        // alignSelf:'flex-end'
+    },
     item: {
         marginTop: 10,
         padding: 10, 
@@ -91,10 +108,19 @@ const styles = StyleSheet.create({
         shadowOffset: { width: 2, height: 2},
         shadowOpacity: 0.3,
         shadowRadius: 3,
-        flexDirection: 'row',
-        justifyContent: 'space-between'
+        flexDirection: 'column',
+        // justifyContent: 'space-between'
     },
     cardText: {
+        fontSize: 18
+    },
+    setRepText: {
         fontSize: 16
-    }
+    },
+    headerText: {
+        fontWeight: 'bold',
+        fontSize: 25,
+        textAlign: 'center',
+        paddingTop: 10
+    },
   });

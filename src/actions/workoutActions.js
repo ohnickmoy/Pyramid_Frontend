@@ -39,3 +39,9 @@ export function updateSetsReps(exerciseSetIndex, reps, exerciseId){
         payload: {exerciseSetIndex: exerciseSetIndex, reps: reps, exerciseId: exerciseId}
     }
 }
+
+export function saveWorkout(){
+    return{
+        type: 'SAVE_WORKOUT'
+    }
+}

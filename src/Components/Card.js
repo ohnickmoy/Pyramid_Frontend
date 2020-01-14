@@ -15,11 +15,11 @@ export default function Card(props) {
                 {exerciseData.setInfo.map((set, index) => {
                     if (set === '') {
                         return (
-                            <TouchableOpacity onPress={() => props.onSetPress(index, exerciseData.reps, exerciseData.id)} style={[styles.circle, styles.gray]} key={set + index}/>
+                            <TouchableOpacity activeOpacity={1} onPress={() => props.onSetPress(index, exerciseData.reps, exerciseData.id)} style={[styles.circle, styles.gray]} key={set + index}/>
                         )
                     }
                     return (
-                        <TouchableOpacity onPress={() => props.onSetPress(index, exerciseData.reps, exerciseData.id)} style={styles.circle} key={set + index}>
+                        <TouchableOpacity activeOpacity={1} onPress={() => props.onSetPress(index, exerciseData.reps, exerciseData.id)} style={styles.circle} key={set + index}>
                             <Text style={styles.circleText}>{set}</Text>
                         </TouchableOpacity>
                     )

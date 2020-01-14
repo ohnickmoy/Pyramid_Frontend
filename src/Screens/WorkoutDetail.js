@@ -1,8 +1,9 @@
 import React from  'react';
-import { StyleSheet, View, Text, FlatList } from 'react-native';
+import { StyleSheet, View, Text, FlatList, Button } from 'react-native';
 import Card from '../Components/Card'
 import { connect } from 'react-redux'
-import { updateSetsReps } from '../actions/workoutActions'
+import { updateSetsReps, saveWorkout } from '../actions/workoutActions'
+import { TouchableOpacity } from 'react-native-gesture-handler';
 
 class WorkoutDetails extends React.Component{
 
@@ -15,8 +16,13 @@ class WorkoutDetails extends React.Component{
         this.props.updateSetsReps(exerciseSetIndex, reps, exerciseId)
     }
 
+    saveWorkout = (navigation) => {
+        this.props.saveWorkout()
+        navigation.navigate('Workouts')
+    }
+
     render(){
-        const {selectedWorkout} = this.props
+        const {selectedWorkout, navigation} = this.props
         return (
             <View style={styles.container}>
             <Text style={styles.headerText}>{this.convertDate(selectedWorkout.workout_date)}</Text>
@@ -26,7 +32,10 @@ class WorkoutDetails extends React.Component{
                         <Card workoutId={selectedWorkout.id} exerciseData={item} onSetPress={this.onSetPress}/>
                     )}
                     keyExtractor={(item) => item.id.toString() + 'WD'}/>
-            </View>
+                <TouchableOpacity style={styles.saveButton} onPress={() => this.saveWorkout(navigation)}>
+                    <Text style={styles.saveText}>Save your Progress</Text>
+                </TouchableOpacity>
+            </View>  
         )
     }
 }
@@ -38,7 +47,8 @@ function mapStateToProps(state){
 }
 
 const mapDispatchToProps = {
-    updateSetsReps
+    updateSetsReps,
+    saveWorkout
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(WorkoutDetails)
@@ -53,4 +63,14 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         paddingTop: 10
     },
+    saveButton: {
+        alignItems: 'center',
+        backgroundColor: '#F2BB05',
+        padding: 10
+    },
+    saveText: {
+        fontSize: 20,
+        color: '#15324A',
+        fontWeight: 'bold'
+    }
 })
