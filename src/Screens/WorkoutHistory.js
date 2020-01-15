@@ -1,8 +1,7 @@
 import React from 'react'
 import { StyleSheet, Text, View, TouchableOpacity, FlatList } from 'react-native'
-import { fetchWorkouts, setDisplayedWorkout } from '../actions/workoutActions'
+import { fetchWorkouts, setDisplayedWorkout, getNextWorkout } from '../actions/workoutActions'
 import { connect } from 'react-redux'
-
 
 class WorkoutHistory extends React.Component{
     
@@ -20,6 +19,11 @@ class WorkoutHistory extends React.Component{
         return dateItems[0]
     }
 
+    getNextWorkout = (navigation) => {
+        // navigation.navigate('Workout Details')
+        this.props.getNextWorkout()
+    }
+
     render(){
         const {loading, workoutHistory, navigation} = this.props
         if(loading){
@@ -27,6 +31,9 @@ class WorkoutHistory extends React.Component{
         }
         return (
             <View style={styles.container}>
+                <TouchableOpacity style={styles.saveButton} onPress={() => this.getNextWorkout(navigation)}>
+                    <Text style={styles.saveText}>Start your next workout</Text>
+                </TouchableOpacity>
                 <FlatList 
                     data={workoutHistory}
                     renderItem={({item}) => (
@@ -66,7 +73,8 @@ function mapStateToProps(state){
 
 const mapDispatchToProps = {
     fetchWorkouts,
-    setDisplayedWorkout
+    setDisplayedWorkout,
+    getNextWorkout
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(WorkoutHistory)
@@ -123,4 +131,16 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         paddingTop: 10
     },
+    saveButton: {
+        alignItems: 'center',
+        backgroundColor: '#F2BB05',
+        padding: 10,
+        marginTop: 10,
+        borderRadius: 3
+    },
+    saveText: {
+        fontSize: 20,
+        color: '#15324A',
+        fontWeight: 'bold'
+    }
   });

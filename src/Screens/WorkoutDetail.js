@@ -29,7 +29,7 @@ class WorkoutDetails extends React.Component{
                 <FlatList 
                     data={selectedWorkout.exercises}
                     renderItem={({item}) => (
-                        <Card workoutId={selectedWorkout.id} exerciseData={item} onSetPress={this.onSetPress}/>
+                        <Card exerciseData={item} onSetPress={this.onSetPress}/>
                     )}
                     keyExtractor={(item) => item.id.toString() + 'WD'}/>
                 <TouchableOpacity style={styles.saveButton} onPress={() => this.saveWorkout(navigation)}>

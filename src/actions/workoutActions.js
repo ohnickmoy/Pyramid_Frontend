@@ -45,3 +45,9 @@ export function saveWorkout(){
         type: 'SAVE_WORKOUT'
     }
 }
+
+export function getNextWorkout(){
+    return{
+        type: 'GET_NEXT_WORKOUT'
+    }
+}

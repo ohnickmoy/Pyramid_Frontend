@@ -1,3 +1,5 @@
+import { getNextWorkout } from '../helpers/workoutAlgoHelpers'
+
 const init_state = {
     workoutHistory: [],
     loading: false,
@@ -38,6 +40,9 @@ function workoutReducer(prevState = init_state, action){
             let workoutIndex = updatedWorkoutHistory.findIndex(workout => workout.id === prevState.selectedWorkout.id)
             updatedWorkoutHistory[workoutIndex] = {...prevState.selectedWorkout}
             return {...prevState, workoutHistory: updatedWorkoutHistory}
+        case 'GET_NEXT_WORKOUT':
+            let nextWorkout = getNextWorkout([...prevState.workoutHistory])
+            return {...prevState, workoutHistory: [nextWorkout, ...prevState.workoutHistory], selectedWorkout: nextWorkout}
         default:
             return prevState
     }
