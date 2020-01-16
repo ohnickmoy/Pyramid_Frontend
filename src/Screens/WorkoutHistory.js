@@ -15,12 +15,13 @@ class WorkoutHistory extends React.Component{
     }
 
     convertDate = (date) => {
-        dateItems = date.split('T')
-        return dateItems[0]
+        date = date.split('T')
+        let convertedTime = new Date(date).toLocaleTimeString()
+        return date[0] + ' - ' + convertedTime
     }
 
     getNextWorkout = (navigation) => {
-        // navigation.navigate('Workout Details')
+        //navigation.navigate('Workout Details')
         this.props.getNextWorkout()
     }
 

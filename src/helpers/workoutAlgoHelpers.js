@@ -1,3 +1,5 @@
+import  deepcopy  from 'deepcopy'
+
 const default_t1 = {
     tier: 'T1',
     weight: 100,
@@ -47,28 +49,28 @@ const getNextRoutineType = (lastWorkout) => {
 const getNextDefaultWorkout = (nextWorkout, nextRoutineType) => {
     switch(nextRoutineType){
         case 'A1':
-            nextWorkout = {...default_workout}
+            nextWorkout = deepcopy(default_workout)
             nextWorkout.routine_type = 'A1'
             nextWorkout.exercises[0].name = 'Squat'
             nextWorkout.exercises[1].name = 'Bench Press'
             nextWorkout.exercises[2].name = 'Lat Pulldown'
             return nextWorkout
         case 'B1':
-            nextWorkout = {...default_workout}
+            nextWorkout = deepcopy(default_workout)
             nextWorkout.routine_type = 'B1'
             nextWorkout.exercises[0].name = 'Overhead Press'
             nextWorkout.exercises[1].name = 'Deadlift'
             nextWorkout.exercises[2].name = 'Dumbbell Row'
             return nextWorkout
         case 'A2':
-            nextWorkout = {...default_workout}
+            nextWorkout = deepcopy(default_workout)
             nextWorkout.routine_type = 'A2'
             nextWorkout.exercises[0].name = 'Bench Press'
             nextWorkout.exercises[1].name = 'Squat'
             nextWorkout.exercises[2].name = 'Lat Pulldown'
             return nextWorkout
         case 'B2':
-            nextWorkout = {...default_workout}
+            nextWorkout = deepcopy(default_workout)
             nextWorkout.routine_type = 'B2'
             nextWorkout.exercises[0].name = 'Deadlift'
             nextWorkout.exercises[1].name = 'Overhead Press'
@@ -89,36 +91,133 @@ const getRandomId = (max) => {
     return Math.floor(Math.random() * Math.floor(max))
 }
 
-const checkT1 = (exercise) => {
-
+const getTotalReps = (setInfo) => {
+    let totalReps = setInfo.filter(num => num)
+    if(totalReps.length > 1){
+        totalReps = totalReps.reduce((num1, num2) => {
+            return parseInt(num1) + parseInt(num2)
+        })
+    }
+    else{
+        totalReps = 0
+    }
+    return totalReps
 }
 
-const doProgressionProtocol = (lastInstanceOfNextWorkout) => {
-    let nextWorkout = {...lastInstanceOfNextWorkout}
-    //console.log(nextWorkout)
-    //map through each exercise
+//gives next tier 1 exercise
+//does success failure logic here
+const nextT1 = (exercise) => {
+    switch(exercise.numSets){
+        case 5: 
+            if(getTotalReps(exercise.setInfo) >= 15){
+                exercise.weight += 5
+                exercise.setInfo = ["","","","",""]
+            }
+            else{
+                exercise.weight += 5
+                exercise.setInfo = ["","","","","",""]
+                exercise.numSets = 6
+                exercise.reps = 2
+            }
+            break;
+        case 6:
+            if(getTotalReps(exercise.setInfo) >= 12){
+                exercise.weight += 5
+                exercise.setInfo = ["","","","","",""]
+            }
+            else{
+                exercise.weight += 5
+                exercise.setInfo = ["","","","","","","","","",""]
+                exercise.numSets = 10
+                exercise.reps = 1
+            }
+            break;
+        case 10:
+            if(getTotalReps(exercise.setInfo) > 10){
+                exercise.weight += 5
+                exercise.setInfo = ["","","","","","","","","",""]
+            }
+            else{
+                exercise.weight = Math.round((exercise.weight * 0.85)/5,0) * 5
+                exercise.setInfo = ["","","","","",""]
+                exercise.numSets = 5
+                exercise.reps = 3
+            }
+            break;
+    }
+    return exercise
+}
+
+const nextT2 = (exercise) => {
+    switch(exercise.reps){
+        case 10:
+            if(getTotalReps(exercise.setInfo) >= 30){
+                exercise.weight += 5
+            }
+            else{
+                exercise.weight += 5
+                exercise.reps = 8
+            }
+            break;
+        case 8:
+            if(getTotalReps(exercise.setInfo) >= 24){
+                exercise.weight += 5
+            }
+            else{
+                exercise.weight += 5
+                exercise.reps = 6
+            }
+            break;
+        case 6:
+            if(getTotalReps(exercise.setInfo) >= 18){
+                exercise.weight += 5
+            }
+            else{
+                exercise.weight = Math.round(((exercise.weight/0.8)*0.7)/5,0) * 5
+                exercise.reps = 10
+            }
+            break;
+    }
+    exercise.setInfo = ["","",""]
+    return exercise
+}
+
+const nextT3 = (exercise) => {
+    exercise.setInfo = ["","",""]
+    return exercise
+}
+
+const doProgressionProtocol = (nextWorkout, lastInstanceOfNextWorkoutType) => {
+    //console.log('last instance',lastInstanceOfNextWorkoutType)
+
+    //copies last instance of next workout type
+    nextWorkout = deepcopy(lastInstanceOfNextWorkoutType) 
+    //cycles through each exercise, returns array of next exercises for each tier
     nextWorkout.exercises = nextWorkout.exercises.map(exercise => {
         switch(exercise.tier){
             case 'T1':
-                exercise = `I'm a T1`
-                return exercise
+                return nextT1(exercise)
             case 'T2':
-                exercise = `I'm a T2`
-                return exercise
+                return nextT2(exercise)
             case 'T3':
-                exercise = `I'm a T3`
-                return exercise
+                return nextT3(exercise)
         }
     })
 
+    // nextWorkout.id = (nextWorkout.id + 1)
+    // nextWorkout.workout_date = getDateTime()
+    // nextWorkout.exercises[0].id = getRandomId(1000)
+    // nextWorkout.exercises[1].id = getRandomId(1000)
+    // nextWorkout.exercises[2].id = getRandomId(1000)
+
     console.log('After map',nextWorkout)
+    return nextWorkout
 }
 
 export function getNextWorkout(workoutHistory){
     let nextWorkout;
     let lastWorkout = workoutHistory[0]
     let nextRoutineType = getNextRoutineType(lastWorkout)
-
     let filteredWorkoutHistory = workoutHistory.filter(workout => workout.routine_type === nextRoutineType)
 
     //means no instance of whatever next workout exists
@@ -133,20 +232,19 @@ export function getNextWorkout(workoutHistory){
     }
     else { 
         //means that instance of whatever next workout does in fact exist 
-        //console.log('Testing for existence case',filteredWorkoutHistory[0])
-        let lastInstanceOfNextWorkout = filteredWorkoutHistory[0]
+        let lastInstanceOfNextWorkoutType = filteredWorkoutHistory[0]
 
-        doProgressionProtocol(lastInstanceOfNextWorkout)
+        nextWorkout = doProgressionProtocol(nextWorkout, lastInstanceOfNextWorkoutType)
+
+        console.log('after progression protocol method ',nextWorkout)
 
         //the below block is for testing purposes to make it work before I do posting to back end
-        nextWorkout = getNextDefaultWorkout(nextWorkout, nextRoutineType)
+        //nextWorkout = getNextDefaultWorkout(nextWorkout, nextRoutineType)
         nextWorkout.id = (lastWorkout.id + 1)
         nextWorkout.workout_date = getDateTime()
         nextWorkout.exercises[0].id = getRandomId(1000)
         nextWorkout.exercises[1].id = getRandomId(1000)
         nextWorkout.exercises[2].id = getRandomId(1000)
-
-
     }
 
     // console.log('default workout', default_workout)
