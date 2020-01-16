@@ -1,6 +1,6 @@
 import React from 'react'
 import { StyleSheet, Text, View, TouchableOpacity, FlatList } from 'react-native'
-import { fetchWorkouts, setDisplayedWorkout, getNextWorkout } from '../actions/workoutActions'
+import { fetchWorkouts, setDisplayedWorkout, getNextWorkout, createNextWorkout } from '../actions/workoutActions'
 import { connect } from 'react-redux'
 
 class WorkoutHistory extends React.Component{
@@ -20,9 +20,9 @@ class WorkoutHistory extends React.Component{
         return date[0] + ' - ' + convertedTime
     }
 
-    getNextWorkout = (navigation) => {
-        //navigation.navigate('Workout Details')
-        this.props.getNextWorkout()
+    getNextWorkout = (workoutHistory, navigation) => {
+        this.props.createNextWorkout(workoutHistory, navigation)
+        // navigation.navigate('Workout Details')
     }
 
     render(){
@@ -32,7 +32,7 @@ class WorkoutHistory extends React.Component{
         }
         return (
             <View style={styles.container}>
-                <TouchableOpacity style={styles.saveButton} onPress={() => this.getNextWorkout(navigation)}>
+                <TouchableOpacity style={styles.saveButton} onPress={() => this.getNextWorkout(workoutHistory, navigation)}>
                     <Text style={styles.saveText}>Start your next workout</Text>
                 </TouchableOpacity>
                 <FlatList 
@@ -75,7 +75,8 @@ function mapStateToProps(state){
 const mapDispatchToProps = {
     fetchWorkouts,
     setDisplayedWorkout,
-    getNextWorkout
+    getNextWorkout,
+    createNextWorkout
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(WorkoutHistory)

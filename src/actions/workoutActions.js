@@ -1,3 +1,5 @@
+import { getNextWorkout } from '../helpers/workoutAlgoHelpers'
+
 const TEST_API = 'http://localhost:3000/api/v1/users/1'
 
 export function fetchWorkoutsBegin(){
@@ -46,8 +48,32 @@ export function saveWorkout(){
     }
 }
 
-export function getNextWorkout(){
+export function displayCreatedWorkout(createdWorkout){
     return{
-        type: 'GET_NEXT_WORKOUT'
+        type: 'DISPLAY_CREATED_WORKOUT',
+        payload:{createdWorkout: createdWorkout}
+    }
+}
+
+export function createNextWorkout(workoutHistory, navigation){
+    let nextWorkout = getNextWorkout([...workoutHistory])
+    return function(dispatch){
+        fetch(TEST_API + '/nextworkout', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json',
+            },
+            body: JSON.stringify({nextWorkout})
+        })
+        .then(res => res.json())
+        .then(data => {
+            let createdWorkout = data.data.attributes
+            dispatch(displayCreatedWorkout(createdWorkout))
+        })
+        .then(data => {
+            navigation.navigate('Workout Details')
+        })
+
     }
 }

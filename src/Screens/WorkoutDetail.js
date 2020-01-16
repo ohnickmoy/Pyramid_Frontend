@@ -23,6 +23,7 @@ class WorkoutDetails extends React.Component{
 
     render(){
         const {selectedWorkout, navigation} = this.props
+        console.log('in details',selectedWorkout)
         return (
             <View style={styles.container}>
             <Text style={styles.headerText}>{this.convertDate(selectedWorkout.workout_date)}</Text>

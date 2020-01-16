@@ -188,7 +188,6 @@ const nextT3 = (exercise) => {
 }
 
 const doProgressionProtocol = (nextWorkout, lastInstanceOfNextWorkoutType) => {
-    //console.log('last instance',lastInstanceOfNextWorkoutType)
 
     //copies last instance of next workout type
     nextWorkout = deepcopy(lastInstanceOfNextWorkoutType) 
@@ -204,13 +203,6 @@ const doProgressionProtocol = (nextWorkout, lastInstanceOfNextWorkoutType) => {
         }
     })
 
-    // nextWorkout.id = (nextWorkout.id + 1)
-    // nextWorkout.workout_date = getDateTime()
-    // nextWorkout.exercises[0].id = getRandomId(1000)
-    // nextWorkout.exercises[1].id = getRandomId(1000)
-    // nextWorkout.exercises[2].id = getRandomId(1000)
-
-    console.log('After map',nextWorkout)
     return nextWorkout
 }
 
@@ -223,12 +215,6 @@ export function getNextWorkout(workoutHistory){
     //means no instance of whatever next workout exists
     if(filteredWorkoutHistory.length === 0){
         nextWorkout = getNextDefaultWorkout(nextWorkout, nextRoutineType)
-        //the below block is for testing purposes to make it work before I do posting to back end
-        nextWorkout.id = (lastWorkout.id + 1)
-        nextWorkout.workout_date = getDateTime()
-        nextWorkout.exercises[0].id = getRandomId(1000)
-        nextWorkout.exercises[1].id = getRandomId(1000)
-        nextWorkout.exercises[2].id = getRandomId(1000)
     }
     else { 
         //means that instance of whatever next workout does in fact exist 
@@ -247,25 +233,5 @@ export function getNextWorkout(workoutHistory){
         nextWorkout.exercises[2].id = getRandomId(1000)
     }
 
-    // console.log('default workout', default_workout)
-
-    //console.log('final workout object to be sent off',nextWorkout)
-
     return nextWorkout
-    
-    //get last workout
-    //look at type of last workout
-        //A1 -> B1, B1 -> A2, A2 -> B2, B2 -> A1
-    //check instance of last type that user is transitioning into
-        //if last type doesn't exist
-            //use defaults
-        //else
-            //cycle through each of the exercises
-                //check their tier
-                    //if tier1
-                        //do the success failure logic
-                    //if tier2
-                        //so on and so forth
-                    //leave tier 3 for now
-
 }
