@@ -1,6 +1,7 @@
 import { getNextWorkout } from '../helpers/workoutAlgoHelpers'
 
 const TEST_API = 'http://localhost:3000/api/v1/users/1'
+const WORKOUT_API = 'http://localhost:3000/api/v1/workouts/'
 
 export function fetchWorkoutsBegin(){
     return {
@@ -42,9 +43,10 @@ export function updateSetsReps(exerciseSetIndex, reps, exerciseId){
     }
 }
 
-export function saveWorkout(){
+export function saveWorkout(updatedWorkout){
     return{
-        type: 'SAVE_WORKOUT'
+        type: 'SAVE_WORKOUT',
+        payload: {updatedWorkout: updatedWorkout}
     }
 }
 
@@ -75,5 +77,26 @@ export function createNextWorkout(workoutHistory, navigation){
             navigation.navigate('Workout Details')
         })
 
+    }
+}
+
+export function fetchSaveWorkout(navigation, selectedWorkout){
+    return function(dispatch){
+        fetch(WORKOUT_API + `${selectedWorkout.id}/saveworkout`, {
+            method: 'PATCH',
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json'
+            },
+            body: JSON.stringify({selectedWorkout})
+        })
+        .then(res => res.json())
+        .then(data => {
+            let updatedWorkout = data.data.attributes
+            dispatch(saveWorkout(updatedWorkout))
+        })
+        .then(data => {
+            navigation.navigate('Workouts')
+        })
     }
 }

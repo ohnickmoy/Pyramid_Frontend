@@ -1,4 +1,4 @@
-import  deepcopy  from 'deepcopy'
+import deepcopy from 'deepcopy'
 
 const default_t1 = {
     tier: 'T1',
@@ -222,15 +222,6 @@ export function getNextWorkout(workoutHistory){
 
         nextWorkout = doProgressionProtocol(nextWorkout, lastInstanceOfNextWorkoutType)
 
-        console.log('after progression protocol method ',nextWorkout)
-
-        //the below block is for testing purposes to make it work before I do posting to back end
-        //nextWorkout = getNextDefaultWorkout(nextWorkout, nextRoutineType)
-        nextWorkout.id = (lastWorkout.id + 1)
-        nextWorkout.workout_date = getDateTime()
-        nextWorkout.exercises[0].id = getRandomId(1000)
-        nextWorkout.exercises[1].id = getRandomId(1000)
-        nextWorkout.exercises[2].id = getRandomId(1000)
     }
 
     return nextWorkout

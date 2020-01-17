@@ -2,7 +2,7 @@ import React from  'react';
 import { StyleSheet, View, Text, FlatList, Button } from 'react-native';
 import Card from '../Components/Card'
 import { connect } from 'react-redux'
-import { updateSetsReps, saveWorkout } from '../actions/workoutActions'
+import { updateSetsReps, saveWorkout, fetchSaveWorkout } from '../actions/workoutActions'
 import { TouchableOpacity } from 'react-native-gesture-handler';
 
 class WorkoutDetails extends React.Component{
@@ -16,14 +16,14 @@ class WorkoutDetails extends React.Component{
         this.props.updateSetsReps(exerciseSetIndex, reps, exerciseId)
     }
 
-    saveWorkout = (navigation) => {
-        this.props.saveWorkout()
-        navigation.navigate('Workouts')
+    saveWorkout = (navigation, selectedWorkout) => {
+        //this.props.saveWorkout()
+        //navigation.navigate('Workouts')
+        this.props.fetchSaveWorkout(navigation, selectedWorkout)
     }
 
     render(){
         const {selectedWorkout, navigation} = this.props
-        console.log('in details',selectedWorkout)
         return (
             <View style={styles.container}>
             <Text style={styles.headerText}>{this.convertDate(selectedWorkout.workout_date)}</Text>
@@ -33,7 +33,7 @@ class WorkoutDetails extends React.Component{
                         <Card exerciseData={item} onSetPress={this.onSetPress}/>
                     )}
                     keyExtractor={(item) => item.id.toString() + 'WD'}/>
-                <TouchableOpacity style={styles.saveButton} onPress={() => this.saveWorkout(navigation)}>
+                <TouchableOpacity style={styles.saveButton} onPress={() => this.saveWorkout(navigation, selectedWorkout)}>
                     <Text style={styles.saveText}>Save your Progress</Text>
                 </TouchableOpacity>
             </View>  
@@ -49,7 +49,8 @@ function mapStateToProps(state){
 
 const mapDispatchToProps = {
     updateSetsReps,
-    saveWorkout
+    saveWorkout,
+    fetchSaveWorkout
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(WorkoutDetails)

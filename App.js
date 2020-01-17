@@ -6,8 +6,8 @@ import { Provider } from 'react-redux'
 import thunk from 'redux-thunk'
 import workoutReducer from './src/reducers/WorkoutReducer'
 
-// const store = createStore(workoutReducer, composeWithDevTools(applyMiddleware(thunk)))
-const store = createStore(workoutReducer, applyMiddleware(thunk))
+const store = createStore(workoutReducer, composeWithDevTools(applyMiddleware(thunk)))
+//const store = createStore(workoutReducer, applyMiddleware(thunk))
 
 export default function App() {
   return (

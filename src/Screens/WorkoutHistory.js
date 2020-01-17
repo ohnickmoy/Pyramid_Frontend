@@ -22,7 +22,6 @@ class WorkoutHistory extends React.Component{
 
     getNextWorkout = (workoutHistory, navigation) => {
         this.props.createNextWorkout(workoutHistory, navigation)
-        // navigation.navigate('Workout Details')
     }
 
     render(){
@@ -50,7 +49,7 @@ class WorkoutHistory extends React.Component{
                                             <Text style={styles.setRepText}>{exercise.name}</Text>
                                             <View style={styles.setRepData}>
                                                 <Text style={styles.setRepText}>{exercise.tier}: </Text>
-                                                <Text style={styles.setRepText}>{exercise.numSets} x {exercise.reps} - {exercise.weight}lb</Text>
+                                                <Text style={styles.setRepText}>{exercise.numSets} sets x {exercise.reps} reps - {exercise.weight}lb</Text>
                                             </View>
                                         </View>
                                     )
