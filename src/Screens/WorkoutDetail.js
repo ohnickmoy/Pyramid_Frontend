@@ -1,5 +1,5 @@
 import React from  'react';
-import { StyleSheet, View, Text, FlatList, Button } from 'react-native';
+import { StyleSheet, View, Text, FlatList } from 'react-native';
 import Card from '../Components/Card'
 import { connect } from 'react-redux'
 import { updateSetsReps, saveWorkout, fetchSaveWorkout } from '../actions/workoutActions'

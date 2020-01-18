@@ -1,7 +1,9 @@
 import { getNextWorkout } from '../helpers/workoutAlgoHelpers'
 
-const TEST_API = 'http://localhost:3000/api/v1/users/1'
-const WORKOUT_API = 'http://localhost:3000/api/v1/workouts/'
+const NGROK = '59f08ac5.ngrok.io'
+
+const TEST_API = `http://${NGROK}/api/v1/users/1`
+const WORKOUT_API = `http://${NGROK}/api/v1/workouts/`
 
 export function fetchWorkoutsBegin(){
     return {

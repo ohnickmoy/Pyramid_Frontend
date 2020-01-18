@@ -15,8 +15,10 @@ class WorkoutHistory extends React.Component{
     }
 
     convertDate = (date) => {
+        console.log('before parsing',date)
         date = date.split('T')
         let convertedTime = new Date(date).toLocaleTimeString()
+        console.log('converted time', convertedTime)
         return date[0] + ' - ' + convertedTime
     }
 
@@ -83,7 +85,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(WorkoutHistory)
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#fafafa',
+        // backgroundColor: '#fafafa',
         marginHorizontal: 10
     },
     topRow: {
