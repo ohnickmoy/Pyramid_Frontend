@@ -8,6 +8,8 @@ import { createAppContainer } from 'react-navigation'
 import WorkoutHistory from '../Screens/WorkoutHistory'
 import WorkoutDetails from '../Screens/WorkoutDetail';
 import InfoScreen from '../Screens/Info'
+import ChartScreen from '../Screens/exerciseCharts'
+
 
 const activeColor = "#15324A";
 const inactiveColor = "#b8bece";
@@ -24,8 +26,14 @@ const screens = {
     }
 }
 
+const chartScreens = {
+    'Progress': {
+        screen: ChartScreen
+    }
+}
+
 const infoScreens = {
-    'Info': {
+    'About Pyramid': {
         screen: InfoScreen
     }
 }
@@ -49,6 +57,15 @@ const InfoStack = createStackNavigator(infoScreens, {
     }
 })
 
+const ChartStack = createStackNavigator(chartScreens, {
+    defaultNavigationOptions: {
+        headerStyle: {
+            backgroundColor: '#15324A'
+        },
+        headerTintColor: '#ffffff',
+    }, 
+})
+
 HomeStack.navigationOptions = {
     tabBarLabel: 'Workout',
     tabBarOptions: {
@@ -66,7 +83,7 @@ HomeStack.navigationOptions = {
 }
 
 InfoStack.navigationOptions ={
-    tabBarLabel: 'Info',
+    tabBarLabel: 'About',
     tabBarOptions: {
         labelStyle: {
             fontSize: 16
@@ -80,9 +97,27 @@ InfoStack.navigationOptions ={
         />
       )
 }
+
+ChartStack.navigationOptions ={
+    tabBarLabel: 'Charts',
+    tabBarOptions: {
+        labelStyle: {
+            fontSize: 16
+        } 
+    },
+    tabBarIcon: ({ focused }) => (
+        <Entypo
+          name="line-graph"
+          size={25}
+          color={focused ? activeColor : inactiveColor}
+        />
+      )
+}
+
 const TabNavigator = createBottomTabNavigator(
     {
         HomeStack,
+        ChartStack,
         InfoStack
     },
     {

@@ -15,11 +15,9 @@ class WorkoutHistory extends React.Component{
     }
 
     convertDate = (date) => {
-        console.log('before parsing',date)
-        date = date.split('T')
+        let convertedDate = new Date(date).toLocaleDateString()
         let convertedTime = new Date(date).toLocaleTimeString()
-        console.log('converted time', convertedTime)
-        return date[0] + ' - ' + convertedTime
+        return convertedDate + ' - ' + convertedTime
     }
 
     getNextWorkout = (workoutHistory, navigation) => {
