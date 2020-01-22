@@ -65,29 +65,29 @@ const ChartStack = createStackNavigator(chartScreens, {
     }, 
 })
 
-HomeStack.navigationOptions = {
-    tabBarLabel: 'Workout',
-    tabBarOptions: {
-        labelStyle: {
-            fontSize: 16,
-        }
-    },
-    tabBarIcon: ({focused}) => (
-        <Image 
-            source={require('../../assets/images/Pyramid_centered.png')}
-            fadeDuration={0}
-            style= {{width: 25, height: 25, tintColor: focused ? activeColor : inactiveColor}}
-        />
-    )
+HomeStack.navigationOptions = ({ navigation }) => {
+    let tabBarVisible = true;
+
+    const routeName = navigation.state.routes[navigation.state.index].routeName;
+
+    if (routeName == "Workout Details") {
+        tabBarVisible = false;
+    }
+    return {
+        tabBarVisible,
+        tabBarLabel: 'Workout',
+        tabBarIcon: ({focused}) => (
+            <Image 
+                source={require('../../assets/images/Pyramid_centered.png')}
+                fadeDuration={0}
+                style= {{width: 25, height: 25, tintColor: focused ? activeColor : inactiveColor}}
+            />
+        )
+    }
 }
 
 InfoStack.navigationOptions ={
     tabBarLabel: 'About',
-    tabBarOptions: {
-        labelStyle: {
-            fontSize: 16
-        }
-    },
     tabBarIcon: ({ focused }) => (
         <Entypo
           name="link"
@@ -99,11 +99,6 @@ InfoStack.navigationOptions ={
 
 ChartStack.navigationOptions ={
     tabBarLabel: 'Charts',
-    tabBarOptions: {
-        labelStyle: {
-            fontSize: 16
-        } 
-    },
     tabBarIcon: ({ focused }) => (
         <Entypo
           name="line-graph"
@@ -120,10 +115,13 @@ const TabNavigator = createBottomTabNavigator(
         InfoStack
     },
     {
+        resetOnBlur: true,
         tabBarOptions: {
             activeTintColor: activeColor,
             inactiveTintColor: inactiveColor,
-            style: {marginTop: 10}
+            labelStyle: {
+                fontSize: 16,
+            },
         }
     }
 )

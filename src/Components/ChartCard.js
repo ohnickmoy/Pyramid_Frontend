@@ -43,9 +43,6 @@ function ChartCard(props) {
         setWeight(' - ' + weight + 'lb')
         setExerciseDate(moment(date).format("MMM DD, YYYY"))
     }
-
-    console.log(exerciseData)
-
     return (
         <View style={styles.exerciseCard}>
             <View style={styles.chart}>
