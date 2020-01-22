@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import {StyleSheet, View, Text } from 'react-native'
 import { LineChart, Grid, YAxis, XAxis } from 'react-native-svg-charts'
 import moment from 'moment'
@@ -10,21 +10,22 @@ const xAxisHeight = 20
 
 const strokeColors = {
     'Squat': '#DB504A',
-    'Bench Press': '#01BAEF',
+    'Bench Press': '#00ADDD',
     'Deadlift': '#20BF55',
     'Overhead Press': '#820263'
 }
 
-const ChartPoints = ({ x, y, data, strokeColor }) =>
+const ChartPoints = ({ x, y, data, strokeColor, circleIndex, handleCirclePress}) =>
     data.map((item, index) => (
         <Circle
             key={index}
             cx={x(index)}
             cy={y(item.weight)}
-            r={6}
+            r={7.5}
             stroke={strokeColor}
-            strokeWidth='3'
-            fill={'white'}
+            strokeWidth={index === circleIndex ? '4' : '3'}
+            fill={index === circleIndex ? 'black' : 'white'}
+            onPress={() => handleCirclePress(index, item.weight, item.workout_date)}
         />
     )
 );
@@ -32,6 +33,19 @@ const ChartPoints = ({ x, y, data, strokeColor }) =>
 function ChartCard(props) {
     let { exerciseData } = props
     let strokeColor = strokeColors[exerciseData.type]
+
+    const [circleIndex, setCircleIndex] = useState(null)
+    const [workoutDate, setExerciseDate] = useState(null)
+    const [weight, setWeight] = useState(null)
+
+    function handleCirclePress(index, weight, date){
+        setCircleIndex(index)
+        setWeight(' - ' + weight + 'lb')
+        setExerciseDate(moment(date).format("MMM DD, YYYY"))
+    }
+
+    console.log(exerciseData)
+
     return (
         <View style={styles.exerciseCard}>
             <View style={styles.chart}>
@@ -51,10 +65,10 @@ function ChartCard(props) {
                         yAccessor={({ item }) => item.weight}
                         //xAccessor={ ({ item }) => moment(item.workout_date)}
                         contentInset={verticalContentInset}
-                        svg={{ stroke: strokeColor, strokeWidth: '3' }}
+                        svg={{ stroke: strokeColor, strokeWidth: '4' }}
                     >
                         <Grid />
-                        <ChartPoints strokeColor={strokeColor} />
+                        <ChartPoints strokeColor={strokeColor} circleIndex={circleIndex} handleCirclePress={handleCirclePress}/>
                     </LineChart>
                     <XAxis
                         style={{ marginHorizontal: -10, height: xAxisHeight }}
@@ -65,7 +79,8 @@ function ChartCard(props) {
                     />
                 </View>
             </View>
-            <Text style={styles.exerciseHeader}>{exerciseData.type}</Text>
+            <Text style={styles.exerciseHeader}>{exerciseData.type}{weight ? weight : ''}</Text>
+            <Text style={styles.exerciseBodyText}>{workoutDate ? workoutDate : `Your workout history for ${exerciseData.type}s`}</Text>
         </View>
     )
 }
@@ -84,6 +99,11 @@ const styles = StyleSheet.create({
         fontSize: 18,
         paddingHorizontal: 15,
         marginBottom: 5
+    },
+    exerciseBodyText: {
+        fontSize: 16,
+        paddingHorizontal: 15,
+        marginBottom: 15
     },
     chart: {
         height:250, 
