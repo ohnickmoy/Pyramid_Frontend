@@ -1,7 +1,6 @@
 import React from 'react'
 import { View, StyleSheet } from 'react-native'
 import { connect } from 'react-redux'
-import moment from 'moment'
 import ChartCard from '../Components/ChartCard'
 import { FlatList } from 'react-native-gesture-handler'
 
