@@ -1,6 +1,5 @@
 import { Image } from 'react-native'
 import React from 'react'
-//import { SafeAreaView } from 'react-navigation'
 import { Entypo } from '@expo/vector-icons';
 import { createStackNavigator } from 'react-navigation-stack'
 import { createBottomTabNavigator } from 'react-navigation-tabs'
@@ -8,7 +7,7 @@ import { createAppContainer } from 'react-navigation'
 import WorkoutHistory from '../Screens/WorkoutHistory'
 import WorkoutDetails from '../Screens/WorkoutDetail';
 import InfoScreen from '../Screens/Info'
-import ChartScreen from '../Screens/exerciseCharts'
+import ExerciseCharts from '../Screens/exerciseCharts'
 
 
 const activeColor = "#15324A";
@@ -28,7 +27,7 @@ const screens = {
 
 const chartScreens = {
     'Progress': {
-        screen: ChartScreen
+        screen: ExerciseCharts
     }
 }
 

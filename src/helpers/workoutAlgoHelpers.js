@@ -139,7 +139,7 @@ const nextT1 = (exercise) => {
             }
             else{
                 exercise.weight = Math.round((exercise.weight * 0.85)/5,0) * 5
-                exercise.setInfo = ["","","","","",""]
+                exercise.setInfo = ["","","","",""]
                 exercise.numSets = 5
                 exercise.reps = 3
             }

@@ -1,6 +1,5 @@
 import React from 'react'
 import { View, Text, StyleSheet } from 'react-native'
-//import  WebBrowser from 'expo'
 import * as WebBrowser from 'expo-web-browser'
 
 const handlePress = async() => {

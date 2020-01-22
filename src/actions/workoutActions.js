@@ -1,6 +1,6 @@
 import { getNextWorkout } from '../helpers/workoutAlgoHelpers'
 
-const NGROK = '9cb42d56.ngrok.io'
+const NGROK = '08797b30.ngrok.io'
 
 const TEST_API = `http://${NGROK}/api/v1/users/1`
 const WORKOUT_API = `http://${NGROK}/api/v1/workouts/`
