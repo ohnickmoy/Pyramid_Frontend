@@ -17,8 +17,6 @@ class WorkoutDetails extends React.Component{
     }
 
     saveWorkout = (navigation, selectedWorkout) => {
-        //this.props.saveWorkout()
-        //navigation.navigate('Workouts')
         this.props.fetchSaveWorkout(navigation, selectedWorkout)
     }
 
@@ -57,7 +55,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(WorkoutDetails)
 
 const styles = StyleSheet.create({
     container:{
-        margin: 10
+        //margin: 10
     },
     headerText: {
         fontWeight: 'bold',
@@ -68,7 +66,8 @@ const styles = StyleSheet.create({
     saveButton: {
         alignItems: 'center',
         backgroundColor: '#F2BB05',
-        padding: 10
+        padding: 10,
+        marginHorizontal: 10
     },
     saveText: {
         fontSize: 20,

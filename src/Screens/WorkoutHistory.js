@@ -83,8 +83,8 @@ export default connect(mapStateToProps, mapDispatchToProps)(WorkoutHistory)
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        // backgroundColor: '#fafafa',
-        marginHorizontal: 10
+        //marginHorizontal: 10
+        //backgroundColor: 'black'
     },
     topRow: {
         flexDirection: 'row',
@@ -92,10 +92,7 @@ const styles = StyleSheet.create({
     },
     bottomRow: {
         flexDirection: 'column',
-        // alignItems: 'center',
         marginTop: 14,
-        // marginBottom:6,
-        // flexWrap: 'wrap',
     },
     exerciseRow: {
         flexDirection: 'row',
@@ -110,15 +107,15 @@ const styles = StyleSheet.create({
     },
     item: {
         marginTop: 10,
+        marginHorizontal: 10,
         padding: 10, 
-        borderRadius: 3,
+        borderRadius: 1.5,
         backgroundColor: '#fff',
         shadowColor: '#000',
         shadowOffset: { width: 2, height: 2},
         shadowOpacity: 0.3,
-        shadowRadius: 3,
+        shadowRadius: 2,
         flexDirection: 'column',
-        // justifyContent: 'space-between'
     },
     cardText: {
         fontSize: 18
@@ -137,6 +134,7 @@ const styles = StyleSheet.create({
         backgroundColor: '#F2BB05',
         padding: 10,
         marginTop: 10,
+        marginHorizontal: 10,
         borderRadius: 3
     },
     saveText: {

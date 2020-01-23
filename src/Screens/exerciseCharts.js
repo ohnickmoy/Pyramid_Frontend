@@ -75,6 +75,6 @@ export default connect(mapStateToProps)(ExerciseCharts)
 const styles = StyleSheet.create({
     container: {
         marginTop: 10,
-        marginHorizontal: 5
+        //marginHorizontal: 5
     },
 })

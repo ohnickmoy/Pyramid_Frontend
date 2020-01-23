@@ -36,9 +36,10 @@ const styles = StyleSheet.create({
         shadowColor: '#000',
         shadowOffset: { width: 2, height: 2},
         shadowOpacity: 0.3,
-        shadowRadius: 3,
+        shadowRadius: 1.5,
         flexDirection: 'column',
         marginBottom: 10,
+        marginHorizontal: 10,
         padding: 5,
     },
     topRow: {

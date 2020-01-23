@@ -85,13 +85,6 @@ function ChartCard(props) {
 export default ChartCard
 
 const styles = StyleSheet.create({
-    headerText: {
-        fontWeight: 'bold',
-        fontSize: 25,
-        textAlign: 'center',
-        paddingTop: 10,
-        marginBottom: 12
-    },
     exerciseHeader: {
         fontSize: 18,
         paddingHorizontal: 15,
@@ -113,8 +106,8 @@ const styles = StyleSheet.create({
         shadowColor: '#000',
         shadowOffset: { width: 2, height: 2},
         shadowOpacity: 0.3,
-        shadowRadius: 3,
+        shadowRadius: 1.5,
         marginBottom: 10,
-        marginHorizontal: 5
+        marginHorizontal: 10
     }
 })
