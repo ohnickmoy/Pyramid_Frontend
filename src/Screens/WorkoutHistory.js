@@ -1,5 +1,5 @@
 import React from 'react'
-import { StyleSheet, Text, View, TouchableOpacity, FlatList } from 'react-native'
+import { StyleSheet, Text, View, TouchableOpacity, FlatList, StatusBar } from 'react-native'
 import { fetchWorkouts, setDisplayedWorkout, getNextWorkout, createNextWorkout } from '../actions/workoutActions'
 import { connect } from 'react-redux'
 
@@ -31,6 +31,7 @@ class WorkoutHistory extends React.Component{
         }
         return (
             <View style={styles.container}>
+                <StatusBar barStyle="light-content" backgroundColor="#15324A" />
                 <TouchableOpacity style={styles.saveButton} onPress={() => this.getNextWorkout(workoutHistory, navigation)}>
                     <Text style={styles.saveText}>Start your next workout</Text>
                 </TouchableOpacity>

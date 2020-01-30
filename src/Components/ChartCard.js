@@ -40,7 +40,7 @@ function ChartCard(props) {
 
     function handleCirclePress(index, weight, date){
         setCircleIndex(index)
-        setWeight(' - ' + weight + 'lb')
+        setWeight(': ' + weight + 'lb')
         setExerciseDate(moment(date).format("MMM DD, YYYY"))
     }
     return (
@@ -77,7 +77,7 @@ function ChartCard(props) {
                 </View>
             </View>
             <Text style={styles.exerciseHeader}>{exerciseData.type}{weight ? weight : ''}</Text>
-            <Text style={styles.exerciseBodyText}>{workoutDate ? workoutDate : `Your workout history for ${exerciseData.type}s`}</Text>
+            <Text style={styles.exerciseBodyText}>{workoutDate ? workoutDate : `Your workout history for ${exerciseData.type}`}</Text>
         </View>
     )
 }

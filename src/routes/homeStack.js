@@ -17,7 +17,7 @@ const screens = {
     'Workouts': {
         screen: WorkoutHistory,
         navigationOptions: {
-            title: 'My Workouts',
+            title: 'PYRAMID',
         }
     },
     'Workout Details': {

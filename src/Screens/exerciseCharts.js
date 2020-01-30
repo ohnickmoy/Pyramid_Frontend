@@ -1,5 +1,5 @@
 import React from 'react'
-import { View, StyleSheet } from 'react-native'
+import { View, StyleSheet, StatusBar } from 'react-native'
 import { connect } from 'react-redux'
 import ChartCard from '../Components/ChartCard'
 import { FlatList } from 'react-native-gesture-handler'
@@ -51,6 +51,7 @@ class ExerciseCharts extends React.Component{
         const sortedExercises = this.sortExercisesByType()
         return (
             <View style={styles.container}>
+                <StatusBar barStyle="light-content" backgroundColor="#15324A" />
                 <FlatList
                     data={sortedExercises}
                     renderItem={({item}) => (

@@ -1,5 +1,5 @@
 import React from 'react'
-import { View, Text, StyleSheet } from 'react-native'
+import { View, Text, StyleSheet, StatusBar } from 'react-native'
 import * as WebBrowser from 'expo-web-browser'
 
 const handlePress = async() => {
@@ -13,6 +13,7 @@ const blogPost = async() => {
 export default function Info(props) {
     return (
         <View style={styles.container}>
+            <StatusBar barStyle="light-content" backgroundColor="#15324A" />
             <Text style={styles.headerText}>About Pyramid</Text>
             <Text style={styles.bodyText}>Thanks for using Pyramid!</Text>
             <Text style={styles.bodyText}>Pyramid is a workout app that follows the GZCL linear progression model for beginner weightlifters. You can check out the infographic explaning GZCL 
