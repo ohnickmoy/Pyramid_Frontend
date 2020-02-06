@@ -6,6 +6,10 @@
 
 Pyramid was my final project during my time at Flatiron School. This is the repo for frontend side of this project. It takes inspiritation from the [GZCL Linear Progression](http://swoleateveryheight.blogspot.com/2014/07/the-gzcl-method-simplified_13.html) weightlifting program. Come check it out!
 
+# Video Walkthrough
+
+Watch this [video](https://www.youtube.com/watch?v=-inkiHxGZGI&t=7s) to see a walkthrough of the project
+
 ##  Motivations
 
 Weightlifting has been one of my growing hobbies for a while now and this training program helped me get stronger pretty quickly when I was starting out. 
