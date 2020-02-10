@@ -23,6 +23,7 @@ One challenge, among many, was implementing the algorithm that followed the line
 Before you begin, ensure you have met the following requirements:
 * You have installed the latest version of 'expo client' since that's what this project was built on.
 * You have a `Mac` machine. This project was built on `macOS Mojave 10.14.6`
+* If you're running on a `Mac` machine, be sure to have XCode installed to run the iOS simulator
 
 ## Under the Hood Stuff
 
