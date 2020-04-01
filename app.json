@@ -25,6 +25,8 @@
     ],
     "ios": {
       "supportsTablet": true
-    }
+    },
+    "description": "Pyramid was my final project during my time at Flatiron School. It takes inspiritation from the GZCL Linear Progression weightlifting program. Come check it out!",
+    "githubUrl": "https://github.com/ohnickmoy/Pyramid_Frontend"
   }
 }
