@@ -3,12 +3,11 @@ import React from 'react'
 import { Entypo } from '@expo/vector-icons';
 import { createStackNavigator } from 'react-navigation-stack'
 import { createBottomTabNavigator } from 'react-navigation-tabs'
-import { createAppContainer, createSwitchNavigator } from 'react-navigation'
+import { createAppContainer } from 'react-navigation'
 import WorkoutHistory from '../Screens/WorkoutHistory'
 import WorkoutDetails from '../Screens/WorkoutDetail';
 import InfoScreen from '../Screens/Info'
 import ExerciseCharts from '../Screens/exerciseCharts'
-import LoginScren from '../Screens/Login'
 
 
 const activeColor = "#15324A";

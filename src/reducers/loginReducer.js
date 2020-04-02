@@ -5,7 +5,8 @@ const init_state = {
 
 function loginReducer(prevState = init_state, action){
     switch(action.type){
-        
+        default:
+            return prevState
     }
 }
 

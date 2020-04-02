@@ -1,5 +1,5 @@
 import React from 'react'
-import {StyleSheet, Text, View } from 'react-native'
+import { StyleSheet, Text, View } from 'react-native'
 import { connect } from 'react-redux'
 
 class LoginScreen extends React.Component{
@@ -29,7 +29,7 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: '#FFF',
         alignItems: 'center',
-        justifyContent: 'space-between'
+        justifyContent: 'center'
     },
     logo: {
         flex: 1,
