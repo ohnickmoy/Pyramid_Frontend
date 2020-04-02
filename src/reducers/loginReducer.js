@@ -8,3 +8,5 @@ function loginReducer(prevState = init_state, action){
         
     }
 }
+
+export default loginReducer
