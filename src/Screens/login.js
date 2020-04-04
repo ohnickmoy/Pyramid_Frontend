@@ -1,18 +1,34 @@
 import React from 'react'
-import { Image, StyleSheet, Text, View } from 'react-native'
-import Button from '../Components/Button'
-import FormTextInput from '../Components/FormTextInput'
+import { Image, StyleSheet, Text, View, TextInput } from 'react-native'
 import imageLogo from '../../assets/images/pyramid_app_icon.png'
 import { connect } from 'react-redux'
+import { TouchableOpacity } from 'react-native-gesture-handler'
 
 class LoginScreen extends React.Component{
     render(){
         return(
             <View style={styles.container}>
                 <Image source={imageLogo} style={styles.logo} />
-                <View style={styles.form}>
-                    
-                </View>
+                    <View style={styles.inputView}>
+                        <TextInput 
+                            style={styles.textInput}
+                            placeholder='Email'
+                            placeholderTextColor='grey'
+                            selectionColor='#15324A'
+                        />
+                    </View>
+                    <View style={styles.inputView}>
+                        <TextInput
+                            secureTextEntry 
+                            style={styles.textInput}
+                            placeholder='Password'
+                            placeholderTextColor='grey'
+                            selectionColor='#15324A'
+                        />
+                    </View>
+                    <TouchableOpacity style={styles.loginBtn}>
+                        <Text>LOGIN</Text>
+                    </TouchableOpacity>
             </View>
         )
     }
@@ -26,26 +42,45 @@ function mapStateToProps(state){
     }
 }
 
-const mapDispatchToProps = {}
+//const mapDispatchToProps = {}
 
-export default connect(mapStateToProps, mapDispatchToProps)(LoginScreen)
+export default connect(mapStateToProps)(LoginScreen)
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
-        backgroundColor: '#FFF',
-        alignItems: 'center',
-        justifyContent: 'space-between'
+      flex: 1,
+      backgroundColor: '#FFFFFF',
+        justifyContent: 'center'
     },
     logo: {
-        flex: 1,
-        width: `50%`,
-        resizeMode: 'contain',
-        alignSelf: "center"
+      width: "50%",
+      height: "50%",
+      resizeMode: 'contain',
+      alignSelf: "center"
     },
-    form: {
-        flex: 1,
-        justifyContent: "center",
-        width: '80%'
-    }
-})
+    inputView: {
+        width:"80%",
+        height:50,
+        marginBottom:20,
+        justifyContent:"center",
+        padding:20,
+        alignSelf: 'center'
+    },
+    textInput:{
+        height:40,
+        borderColor: '#15324A',
+        borderBottomWidth: StyleSheet.hairlineWidth,
+        marginBottom: 20
+    },
+    loginBtn:{
+        backgroundColor:"#fb5b5a",
+        borderRadius:4,
+        height:50,
+        alignItems:"center",
+        justifyContent:"center",
+        marginTop:40,
+        marginBottom:10,
+        width: '72%',
+        alignSelf: 'center'
+      },
+  });
