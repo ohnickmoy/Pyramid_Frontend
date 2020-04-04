@@ -5,8 +5,8 @@ class Button extends React.Component {
     render(){
         const {label, onPress} = this.props;
         return(
-           <TouchableOpacity>
-
+           <TouchableOpacity style={styles.container} onPress={onPress}>
+               <Text style={styles.text}>{label}</Text>
            </TouchableOpacity> 
         )
     }

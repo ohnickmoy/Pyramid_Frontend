@@ -1,12 +1,18 @@
 import React from 'react'
-import { StyleSheet, Text, View } from 'react-native'
+import { Image, StyleSheet, Text, View } from 'react-native'
+import Button from '../Components/Button'
+import FormTextInput from '../Components/FormTextInput'
+import imageLogo from '../../assets/images/pyramid_app_icon.png'
 import { connect } from 'react-redux'
 
 class LoginScreen extends React.Component{
     render(){
         return(
             <View style={styles.container}>
-                <Text>Temp Login Screen</Text>
+                <Image source={imageLogo} style={styles.logo} />
+                <View style={styles.form}>
+                    
+                </View>
             </View>
         )
     }
@@ -29,11 +35,11 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: '#FFF',
         alignItems: 'center',
-        justifyContent: 'center'
+        justifyContent: 'space-between'
     },
     logo: {
         flex: 1,
-        width: `100%`,
+        width: `50%`,
         resizeMode: 'contain',
         alignSelf: "center"
     },
