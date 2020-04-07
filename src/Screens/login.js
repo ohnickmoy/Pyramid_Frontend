@@ -2,9 +2,11 @@ import React from 'react'
 import { Image, StyleSheet, Text, View, TextInput, KeyboardAvoidingView } from 'react-native'
 import imageLogo from '../../assets/images/pyramid_app_icon.png'
 import { connect } from 'react-redux'
+import { changeUsername } from '../actions/loginActions'
 import { TouchableOpacity } from 'react-native-gesture-handler'
 
 class LoginScreen extends React.Component{
+
     render(){
         return(
             <KeyboardAvoidingView 
@@ -18,6 +20,7 @@ class LoginScreen extends React.Component{
                         placeholder='Username'
                         placeholderTextColor='grey'
                         selectionColor='#15324A'
+                        onChangeText={this.props.changeUsername}
                     />
                 </View>
                 <View style={styles.inputView}>
@@ -45,9 +48,11 @@ function mapStateToProps(state){
     }
 }
 
-//const mapDispatchToProps = {}
+const mapDispatchToProps = {
+    changeUsername
+}
 
-export default connect(mapStateToProps)(LoginScreen)
+export default connect(mapStateToProps, mapDispatchToProps)(LoginScreen)
 
 const styles = StyleSheet.create({
     container: {

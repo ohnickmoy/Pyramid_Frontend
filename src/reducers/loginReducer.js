@@ -5,6 +5,8 @@ const init_state = {
 
 function loginReducer(prevState = init_state, action){
     switch(action.type){
+        case 'CHANGE_USERNAME':
+            return {...prevState, username:action.payload.newUsername}
         default:
             return prevState
     }
