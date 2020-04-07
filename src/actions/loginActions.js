@@ -4,3 +4,10 @@ export function changeUsername(e){
         payload: {newUsername: e}
     }
 }
+
+export function changePassword(e){
+    return {
+        type: 'CHANGE_PASSWORD',
+        payload: {newPassword: e}
+    }
+}

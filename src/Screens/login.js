@@ -2,7 +2,7 @@ import React from 'react'
 import { Image, StyleSheet, Text, View, TextInput, KeyboardAvoidingView } from 'react-native'
 import imageLogo from '../../assets/images/pyramid_app_icon.png'
 import { connect } from 'react-redux'
-import { changeUsername } from '../actions/loginActions'
+import { changeUsername, changePassword } from '../actions/loginActions'
 import { TouchableOpacity } from 'react-native-gesture-handler'
 
 class LoginScreen extends React.Component{
@@ -30,6 +30,7 @@ class LoginScreen extends React.Component{
                         placeholder='Password'
                         placeholderTextColor='grey'
                         selectionColor='#15324A'
+                        onChangeText={this.props.changePassword}
                     />
                 </View>
                 <TouchableOpacity style={styles.loginBtn}>
@@ -49,7 +50,8 @@ function mapStateToProps(state){
 }
 
 const mapDispatchToProps = {
-    changeUsername
+    changeUsername,
+    changePassword
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(LoginScreen)
