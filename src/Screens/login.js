@@ -1,5 +1,5 @@
 import React from 'react'
-import { Image, StyleSheet, Text, View, TextInput } from 'react-native'
+import { Image, StyleSheet, Text, View, TextInput, KeyboardAvoidingView } from 'react-native'
 import imageLogo from '../../assets/images/pyramid_app_icon.png'
 import { connect } from 'react-redux'
 import { TouchableOpacity } from 'react-native-gesture-handler'
@@ -7,29 +7,32 @@ import { TouchableOpacity } from 'react-native-gesture-handler'
 class LoginScreen extends React.Component{
     render(){
         return(
-            <View style={styles.container}>
+            <KeyboardAvoidingView 
+                style={styles.container}
+                behavior='padding'
+            >
                 <Image source={imageLogo} style={styles.logo} />
-                    <View style={styles.inputView}>
-                        <TextInput 
-                            style={styles.textInput}
-                            placeholder='Email'
-                            placeholderTextColor='grey'
-                            selectionColor='#15324A'
-                        />
-                    </View>
-                    <View style={styles.inputView}>
-                        <TextInput
-                            secureTextEntry 
-                            style={styles.textInput}
-                            placeholder='Password'
-                            placeholderTextColor='grey'
-                            selectionColor='#15324A'
-                        />
-                    </View>
-                    <TouchableOpacity style={styles.loginBtn}>
-                        <Text>LOGIN</Text>
-                    </TouchableOpacity>
-            </View>
+                <View style={styles.inputView}>
+                    <TextInput 
+                        style={styles.textInput}
+                        placeholder='Username'
+                        placeholderTextColor='grey'
+                        selectionColor='#15324A'
+                    />
+                </View>
+                <View style={styles.inputView}>
+                    <TextInput
+                        secureTextEntry 
+                        style={styles.textInput}
+                        placeholder='Password'
+                        placeholderTextColor='grey'
+                        selectionColor='#15324A'
+                    />
+                </View>
+                <TouchableOpacity style={styles.loginBtn}>
+                    <Text>LOGIN</Text>
+                </TouchableOpacity>
+            </KeyboardAvoidingView>
         )
     }
     
@@ -73,12 +76,12 @@ const styles = StyleSheet.create({
         marginBottom: 20
     },
     loginBtn:{
-        backgroundColor:"#fb5b5a",
+        backgroundColor:"#F2BB05",
         borderRadius:4,
         height:50,
         alignItems:"center",
         justifyContent:"center",
-        marginTop:40,
+        marginTop:20,
         marginBottom:10,
         width: '72%',
         alignSelf: 'center'
