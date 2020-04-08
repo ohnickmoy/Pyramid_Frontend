@@ -6,6 +6,15 @@ import { changeUsername, changePassword } from '../actions/loginActions'
 import { TouchableOpacity } from 'react-native-gesture-handler'
 
 class LoginScreen extends React.Component{
+    handleLoginPress = () => {
+        console.log("Login button pressed")
+        if(!this.props.username){
+            return alert('Please submit a username')
+        }
+        else if(!this.props.password){
+            return alert('Please submit a password')
+        }
+    }
 
     render(){
         return(
@@ -21,6 +30,7 @@ class LoginScreen extends React.Component{
                         placeholderTextColor='grey'
                         selectionColor='#15324A'
                         onChangeText={this.props.changeUsername}
+                        autoCorrect={false}
                     />
                 </View>
                 <View style={styles.inputView}>
@@ -31,9 +41,13 @@ class LoginScreen extends React.Component{
                         placeholderTextColor='grey'
                         selectionColor='#15324A'
                         onChangeText={this.props.changePassword}
+                        autoCorrect={false}
                     />
                 </View>
-                <TouchableOpacity style={styles.loginBtn}>
+                <TouchableOpacity 
+                    style={styles.loginBtn}
+                    onPress={this.handleLoginPress}
+                >
                     <Text>LOGIN</Text>
                 </TouchableOpacity>
             </KeyboardAvoidingView>
