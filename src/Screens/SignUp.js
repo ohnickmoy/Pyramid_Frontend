@@ -1,5 +1,5 @@
 import React from 'react'
-import { View, Text, StyleSheet } from 'react-native'
+import { View, Text, StyleSheet, Image, TextInput, TouchableOpacity } from 'react-native'
 import { connect } from 'react-redux'
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import imageLogo from '../../assets/images/pyramid_app_icon.png'
@@ -74,6 +74,7 @@ const styles= StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: '#FFFFFF',
+        justifyContent: 'center'
     },
     logo: {
         width: "50%",

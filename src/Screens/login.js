@@ -14,8 +14,12 @@ class LoginScreen extends React.Component{
         this.props.loginUser(this.props.username, this.props.password)
     }
 
+    goToSignUp = (navigation) => {
+        navigation.navigate('SignUp')
+    }
+
     render(){
-        const {username, password} = this.props
+        const {username, password, navigation} = this.props
         return(
             <KeyboardAvoidingView 
                 style={styles.container}
@@ -51,6 +55,7 @@ class LoginScreen extends React.Component{
                 </TouchableOpacity>
                 <TouchableOpacity 
                     style={styles.signUpBtn}
+                    onPress={() => {this.goToSignUp(navigation)}}
                 >
                     <Text style={styles.signUpText}>New? Create a new account!</Text>
                 </TouchableOpacity>
