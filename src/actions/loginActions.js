@@ -16,6 +16,13 @@ export function changePassword(e){
     }
 }
 
+export function changePasswordVerify(e){
+    return {
+        type: 'CHANGE_PASSWORD_VERIFY',
+        payload: {newPasswordVerify: e}
+    }
+}
+
 export function loginUser(username, password){
     console.log('hit it')
     return function(dispatch){

@@ -15,6 +15,7 @@ class LoginScreen extends React.Component{
     }
 
     render(){
+        const {username, password} = this.props
         return(
             <KeyboardAvoidingView 
                 style={styles.container}
@@ -78,7 +79,7 @@ const styles = StyleSheet.create({
     container: {
       flex: 1,
       backgroundColor: '#FFFFFF',
-        //justifyContent: 'center'
+      justifyContent: 'center'
     },
     logo: {
       width: "50%",
