@@ -3,9 +3,19 @@ import { View, Text, StyleSheet, Image, TextInput, TouchableOpacity } from 'reac
 import { connect } from 'react-redux'
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import imageLogo from '../../assets/images/pyramid_app_icon.png'
-import { changeUsername, changePassword, changePasswordVerify } from '../actions/loginActions'
+import { changeUsername, changePassword, changePasswordVerify, createUser } from '../actions/loginActions'
 
 class SignupScreen extends React.Component{
+    handleSignUpPress =() => {
+        console.log('Sign up button pressed')
+        if(this.props.passwordVerify !== this.props.password)
+            return alert('Passwords do not match')
+        else if(!this.props.username || !this.props.password || !this.props.passwordVerify)
+            return alert('Please complete the full form')
+        else
+            this.props.createUser(this.props.username, this.props.passwordVerify)
+    }
+
     render(){
         return(
                 <KeyboardAwareScrollView
@@ -48,8 +58,15 @@ class SignupScreen extends React.Component{
                     </View>
                     <TouchableOpacity 
                         style={styles.signUpBtn}
+                        onPress={this.handleSignUpPress}
                     >
-                    <Text style={styles.signUpText}>Create your account</Text>
+                        <Text style={styles.signUpText}>Create your account</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity 
+                        style={styles.loginBtn}
+                        onPress={() => this.props.navigation.navigate('Login')}
+                    >
+                        <Text>Go back to Login Screen</Text>
                     </TouchableOpacity>
                 </KeyboardAwareScrollView>
         )
@@ -67,7 +84,8 @@ function mapStateToProps(state){
 const mapDispatchToProps = {
     changeUsername,
     changePassword,
-    changePasswordVerify
+    changePasswordVerify,
+    createUser
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(SignupScreen)
@@ -111,5 +129,16 @@ const styles= StyleSheet.create({
       },
       signUpText: {
           color: '#FFFFFF'
-      }
+      },
+      loginBtn:{
+        backgroundColor:"#F2BB05",
+        borderRadius:4,
+        height:50,
+        alignItems:"center",
+        justifyContent:"center",
+        marginTop:20,
+        marginBottom:10,
+        width: '72%',
+        alignSelf: 'center'
+      },
 })

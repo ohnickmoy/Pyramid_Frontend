@@ -15,7 +15,7 @@ class LoginScreen extends React.Component{
     }
 
     goToSignUp = (navigation) => {
-        navigation.navigate('SignUp')
+        navigation.navigate('Sign Up')
     }
 
     render(){

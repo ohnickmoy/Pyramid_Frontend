@@ -7,7 +7,7 @@ const loginScreens = {
     'Login': {
         screen: LoginScreen
     },
-    'SignUp': {
+    'Sign Up': {
         screen: SignupScreen
     }
 }

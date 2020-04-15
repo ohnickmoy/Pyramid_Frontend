@@ -23,6 +23,13 @@ export function changePasswordVerify(e){
     }
 }
 
+export function createUser(username, password){
+    console.log('hit it with the create button')
+    return function(dispatch){
+        
+    }
+}
+
 export function loginUser(username, password){
     console.log('hit it')
     return function(dispatch){
