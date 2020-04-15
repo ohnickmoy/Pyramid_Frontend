@@ -8,8 +8,11 @@ import { changeUsername, changePassword, changePasswordVerify } from '../actions
 class SignupScreen extends React.Component{
     render(){
         return(
-            <View style={styles.container}>
-                <KeyboardAwareScrollView>
+                <KeyboardAwareScrollView
+                    resetScrollToCoords={{x:0, y:0}}
+                    contentContainerStyle={styles.container}
+                    scrollEnabled={true}
+                >
                     <Image source={imageLogo} style={styles.logo} />
                     <View style={styles.inputView}>
                     <TextInput 
@@ -49,7 +52,6 @@ class SignupScreen extends React.Component{
                     <Text style={styles.signUpText}>Create your account</Text>
                     </TouchableOpacity>
                 </KeyboardAwareScrollView>
-            </View>
         )
     }
 }
