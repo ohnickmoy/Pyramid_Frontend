@@ -13,7 +13,7 @@ class SignupScreen extends React.Component{
         else if(!this.props.username || !this.props.password || !this.props.passwordVerify)
             return alert('Please complete the full form')
         else
-            this.props.createUser(this.props.username, this.props.passwordVerify)
+            this.props.createUser(this.props.username, this.props.password)
     }
 
     render(){

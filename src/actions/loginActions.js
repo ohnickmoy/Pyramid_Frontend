@@ -1,6 +1,7 @@
-const NGROK = '02fdfbcd.ngrok.io'
+const NGROK = '64eb620f.ngrok.io'
 
 const LOGIN_API = `http://${NGROK}/api/v1/login`
+const SIGNUP_API = `http://${NGROK}/api/v1/signup`
 
 export function changeUsername(e){
     return {
@@ -24,9 +25,27 @@ export function changePasswordVerify(e){
 }
 
 export function createUser(username, password){
-    console.log('hit it with the create button')
+    //console.log('hit it with the create button')
+    //console.log(username, password, 'check')
     return function(dispatch){
-        
+        fetch(SIGNUP_API, {
+            method: 'POST',
+            headers: {
+                "Content-Type": 'application/json',
+                "Accept": "application/json"
+            }, 
+            body: JSON.stringify({
+                username: username,
+                password: password
+            })
+        })
+        .then(res=>res.json())
+        .then(data => {
+            console.log(data)
+            if(data.errors){
+                alert(data.errors[0])
+            }
+        })
     }
 }
 
