@@ -7,7 +7,7 @@ Pyramid was my final project during my time at Flatiron School. This is the repo
 
 # Video Walkthrough
 
-Watch this [video](https://www.youtube.com/watch?v=-inkiHxGZGI&t) to see a walkthrough of the project
+Watch this [video](https://www.youtube.com/watch?v=-inkiHxGZGI&t=7s) to see a walkthrough of the project
 
 ##  Motivations
 
