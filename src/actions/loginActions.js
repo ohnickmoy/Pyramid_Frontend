@@ -25,8 +25,6 @@ export function changePasswordVerify(e){
 }
 
 export function createUser(username, password){
-    //console.log('hit it with the create button')
-    //console.log(username, password, 'check')
     return function(dispatch){
         fetch(SIGNUP_API, {
             method: 'POST',
