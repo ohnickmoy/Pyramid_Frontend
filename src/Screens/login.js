@@ -2,10 +2,24 @@ import React from 'react'
 import { Image, StyleSheet, Text, View, TextInput, KeyboardAvoidingView } from 'react-native'
 import imageLogo from '../../assets/images/pyramid_app_icon.png'
 import { connect } from 'react-redux'
+import { changeUsername, changePassword, loginUser } from '../actions/loginActions'
 import { TouchableOpacity } from 'react-native-gesture-handler'
 
 class LoginScreen extends React.Component{
+    handleLoginPress = (navigation) => {
+        //console.log(username, password)
+        if(!this.props.username || !this.props.password){
+            return alert('Please complete the full form')
+        }
+        this.props.loginUser(this.props.username, this.props.password, navigation)
+    }
+
+    goToSignUp = (navigation) => {
+        navigation.navigate('Sign Up')
+    }
+
     render(){
+        const {username, password, navigation} = this.props
         return(
             <KeyboardAvoidingView 
                 style={styles.container}
@@ -18,6 +32,8 @@ class LoginScreen extends React.Component{
                         placeholder='Username'
                         placeholderTextColor='grey'
                         selectionColor='#15324A'
+                        onChangeText={this.props.changeUsername}
+                        autoCorrect={false}
                     />
                 </View>
                 <View style={styles.inputView}>
@@ -27,10 +43,21 @@ class LoginScreen extends React.Component{
                         placeholder='Password'
                         placeholderTextColor='grey'
                         selectionColor='#15324A'
+                        onChangeText={this.props.changePassword}
+                        autoCorrect={false}
                     />
                 </View>
-                <TouchableOpacity style={styles.loginBtn}>
+                <TouchableOpacity 
+                    style={styles.loginBtn}
+                    onPress={() => this.handleLoginPress(navigation)}
+                >
                     <Text>LOGIN</Text>
+                </TouchableOpacity>
+                <TouchableOpacity 
+                    style={styles.signUpBtn}
+                    onPress={() => {this.goToSignUp(navigation)}}
+                >
+                    <Text style={styles.signUpText}>New? Create a new account!</Text>
                 </TouchableOpacity>
             </KeyboardAvoidingView>
         )
@@ -40,20 +67,24 @@ class LoginScreen extends React.Component{
 
 function mapStateToProps(state){
     return{
-        username: state.username,
-        password: state.password
+        username: state.auth.username,
+        password: state.auth.password
     }
 }
 
-//const mapDispatchToProps = {}
+const mapDispatchToProps = {
+    changeUsername,
+    changePassword,
+    loginUser
+}
 
-export default connect(mapStateToProps)(LoginScreen)
+export default connect(mapStateToProps, mapDispatchToProps)(LoginScreen)
 
 const styles = StyleSheet.create({
     container: {
       flex: 1,
       backgroundColor: '#FFFFFF',
-        justifyContent: 'center'
+      justifyContent: 'center'
     },
     logo: {
       width: "50%",
@@ -86,4 +117,18 @@ const styles = StyleSheet.create({
         width: '72%',
         alignSelf: 'center'
       },
+      signUpBtn:{
+        backgroundColor:"#15324A",
+        borderRadius:4,
+        height:50,
+        alignItems:"center",
+        justifyContent:"center",
+        marginTop:20,
+        marginBottom:10,
+        width: '72%',
+        alignSelf: 'center'
+      },
+      signUpText: {
+          color: '#FFFFFF'
+      }
   });

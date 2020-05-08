@@ -1,10 +1,10 @@
 import { combineReducers } from 'redux';
-import workoutReducer from './src/reducers/WorkoutReducer'
-import loginReducer from  './src/reducers/loginReducer'
+import workoutReducer from './WorkoutReducer'
+import loginReducer from  './loginReducer'
 
 const rootReducer = combineReducers({
-    workoutReducer,
-    loginReducer
+    app: workoutReducer,
+    auth: loginReducer
 })
 
 export default rootReducer;

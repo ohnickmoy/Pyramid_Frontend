@@ -42,7 +42,7 @@ class WorkoutDetails extends React.Component{
 
 function mapStateToProps(state){
     return {
-        selectedWorkout: state.selectedWorkout
+        selectedWorkout: state.app.selectedWorkout
     }
 }
 
