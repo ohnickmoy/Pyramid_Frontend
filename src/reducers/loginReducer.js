@@ -3,8 +3,7 @@ const init_state = {
     password: '',
     passwordVerify: '',
     loggedIn: false,
-    userId:null,
-    
+    userId: null,
 }
 
 function loginReducer(prevState = init_state, action){
@@ -15,8 +14,8 @@ function loginReducer(prevState = init_state, action){
             return {...prevState, password: action.payload.newPassword}
         case 'CHANGE_PASSWORD_VERIFY':
             return {...prevState, passwordVerify: action.payload.newPasswordVerify}
-        case 'LOGIN_USER':
-            return prevState
+        case 'SET_USER':
+            return {...prevState, loggedIn: true, userId: action.payload.userId}
         default:
             return prevState
     }

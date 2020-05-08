@@ -6,12 +6,12 @@ import { changeUsername, changePassword, loginUser } from '../actions/loginActio
 import { TouchableOpacity } from 'react-native-gesture-handler'
 
 class LoginScreen extends React.Component{
-    handleLoginPress = () => {
-        console.log("Login button pressed")
+    handleLoginPress = (navigation) => {
+        //console.log(username, password)
         if(!this.props.username || !this.props.password){
             return alert('Please complete the full form')
         }
-        this.props.loginUser(this.props.username, this.props.password)
+        this.props.loginUser(this.props.username, this.props.password, navigation)
     }
 
     goToSignUp = (navigation) => {
@@ -49,7 +49,7 @@ class LoginScreen extends React.Component{
                 </View>
                 <TouchableOpacity 
                     style={styles.loginBtn}
-                    onPress={this.handleLoginPress}
+                    onPress={() => this.handleLoginPress(navigation)}
                 >
                     <Text>LOGIN</Text>
                 </TouchableOpacity>
@@ -67,8 +67,8 @@ class LoginScreen extends React.Component{
 
 function mapStateToProps(state){
     return{
-        username: state.username,
-        password: state.password
+        username: state.auth.username,
+        password: state.auth.password
     }
 }
 

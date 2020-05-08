@@ -1,8 +1,8 @@
 import { getNextWorkout } from '../helpers/workoutAlgoHelpers'
 
-const NGROK = '64eb620f.ngrok.io'
+const NGROK = 'ba64c319.ngrok.io'
 
-const TEST_API = `http://${NGROK}/api/v1/users/1`
+const TEST_API = `http://${NGROK}/api/v1/users/`
 const WORKOUT_API = `http://${NGROK}/api/v1/workouts/`
 
 export function fetchWorkoutsBegin(){
@@ -18,10 +18,11 @@ export function setWorkouts(workouts){
     }
 }
 
-export function fetchWorkouts(){
+export function fetchWorkouts(id){
     return function(dispatch){
         dispatch(fetchWorkoutsBegin())
-        fetch(TEST_API)
+        console.log(`${TEST_API}${id}`)
+        fetch(`${TEST_API}${id}`)
             .then(res => res.json())
             .then(data => {
                 let workouts = data.data.attributes.workouts.reverse()

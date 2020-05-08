@@ -75,9 +75,9 @@ class SignupScreen extends React.Component{
 
 function mapStateToProps(state){
     return {
-        username: state.username,
-        password: state.password,
-        passwordVerify: state.passwordVerify
+        username: state.auth.username,
+        password: state.auth.password,
+        passwordVerify: state.auth.passwordVerify
     }
 }
 

@@ -67,7 +67,7 @@ class ExerciseCharts extends React.Component{
 
 function mapStateToProps(state){
     return {
-        workoutHistory: state.workoutHistory
+        workoutHistory: state.app.workoutHistory
     }
 }
 

@@ -24,6 +24,13 @@ export function changePasswordVerify(e){
     }
 }
 
+export function setUser(userId){
+    return {
+        type: 'SET_USER',
+        payload: {userId: userId}
+    }
+}
+
 export function createUser(username, password){
     return function(dispatch){
         fetch(SIGNUP_API, {
@@ -50,7 +57,7 @@ export function createUser(username, password){
     }
 }
 
-export function loginUser(username, password){
+export function loginUser(username, password, navigation){
     console.log('hit it')
     return function(dispatch){
         fetch(LOGIN_API, {
@@ -66,7 +73,10 @@ export function loginUser(username, password){
         })
         .then(res=>res.json())
         .then(data => {
-            console.log(data)
+            dispatch(setUser(data.data.id))
+        })
+        .then(data => {
+            navigation.navigate('App')
         })
     }
 }

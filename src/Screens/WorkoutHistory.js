@@ -6,7 +6,8 @@ import { connect } from 'react-redux'
 class WorkoutHistory extends React.Component{
     
     componentDidMount(){
-        this.props.fetchWorkouts()
+        console.log(this.props.id, 'id')
+        this.props.fetchWorkouts(this.props.id)
     }
 
     goToDetails = (navigation, id) => {
@@ -67,8 +68,9 @@ class WorkoutHistory extends React.Component{
 
 function mapStateToProps(state){
     return{
-        workoutHistory: state.workoutHistory,
-        loading: state.loading
+        workoutHistory: state.app.workoutHistory,
+        loading: state.app.loading,
+        id: state.auth.userId
     }
 }
 
