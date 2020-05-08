@@ -1,7 +1,10 @@
 const init_state = {
     username: '',
     password: '',
-    passwordVerify: ''
+    passwordVerify: '',
+    loggedIn: false,
+    userId:null,
+    
 }
 
 function loginReducer(prevState = init_state, action){

@@ -1,4 +1,4 @@
-const NGROK = '64eb620f.ngrok.io'
+const NGROK = 'ba64c319.ngrok.io'
 
 const LOGIN_API = `http://${NGROK}/api/v1/login`
 const SIGNUP_API = `http://${NGROK}/api/v1/signup`
@@ -39,6 +39,9 @@ export function createUser(username, password){
         })
         .then(res=>res.json())
         .then(data => {
+            //in this portion, we received a user  and we're just logging it to the console
+            //in this portion we probably have to do a redirect using a navigator
+            //in this case, its the workouts screen
             console.log(data)
             if(data.errors){
                 alert(data.errors[0])
