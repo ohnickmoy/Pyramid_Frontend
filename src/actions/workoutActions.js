@@ -1,8 +1,8 @@
 import { getNextWorkout } from '../helpers/workoutAlgoHelpers'
 
-const NGROK = 'ba64c319.ngrok.io'
+const NGROK = '148cfa58.ngrok.io'
 
-const TEST_API = `http://${NGROK}/api/v1/users/`
+const USER_API = `http://${NGROK}/api/v1/users/`
 const WORKOUT_API = `http://${NGROK}/api/v1/workouts/`
 
 export function fetchWorkoutsBegin(){
@@ -21,11 +21,12 @@ export function setWorkouts(workouts){
 export function fetchWorkouts(id){
     return function(dispatch){
         dispatch(fetchWorkoutsBegin())
-        console.log(`${TEST_API}${id}`)
-        fetch(`${TEST_API}${id}`)
+        fetch(`${USER_API}${id}/workouts`)
             .then(res => res.json())
             .then(data => {
-                let workouts = data.data.attributes.workouts.reverse()
+                //let workouts = data.data.attributes.workouts.reverse()
+                let workouts = data.data.reverse()
+                console.log(workouts)
                 dispatch(setWorkouts(workouts))
             })
     }
@@ -63,7 +64,7 @@ export function displayCreatedWorkout(createdWorkout){
 export function createNextWorkout(workoutHistory, navigation){
     let nextWorkout = getNextWorkout([...workoutHistory])
     return function(dispatch){
-        fetch(TEST_API + '/nextworkout', {
+        fetch(USER_API + '/nextworkout', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -84,6 +85,8 @@ export function createNextWorkout(workoutHistory, navigation){
 }
 
 export function fetchSaveWorkout(navigation, selectedWorkout){
+    console.log(`${WORKOUT_API}${selectedWorkout.id}/saveworkout`)
+    console.log(selectedWorkout)
     return function(dispatch){
         fetch(WORKOUT_API + `${selectedWorkout.id}/saveworkout`, {
             method: 'PATCH',
@@ -95,7 +98,9 @@ export function fetchSaveWorkout(navigation, selectedWorkout){
         })
         .then(res => res.json())
         .then(data => {
+            console.log(data)
             let updatedWorkout = data.data.attributes
+            console.log(updatedWorkout)
             dispatch(saveWorkout(updatedWorkout))
         })
         .then(data => {

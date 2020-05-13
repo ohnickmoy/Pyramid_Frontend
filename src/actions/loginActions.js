@@ -1,4 +1,4 @@
-const NGROK = 'ba64c319.ngrok.io'
+const NGROK = '148cfa58.ngrok.io'
 
 const LOGIN_API = `http://${NGROK}/api/v1/login`
 const SIGNUP_API = `http://${NGROK}/api/v1/signup`

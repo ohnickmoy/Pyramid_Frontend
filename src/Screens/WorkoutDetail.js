@@ -13,6 +13,7 @@ class WorkoutDetails extends React.Component{
     }
 
     onSetPress = (exerciseSetIndex, reps, exerciseId) => {
+        //console.log(exerciseSetIndex, reps, exerciseId)
         this.props.updateSetsReps(exerciseSetIndex, reps, exerciseId)
     }
 
@@ -22,17 +23,18 @@ class WorkoutDetails extends React.Component{
 
     render(){
         const {selectedWorkout, navigation} = this.props
+        //console.log(selectedWorkout)
         return (
             <View style={styles.container}>
             <StatusBar barStyle="light-content" backgroundColor="#15324A" />
-            <Text style={styles.headerText}>{this.convertDate(selectedWorkout.workout_date)}</Text>
+            <Text style={styles.headerText}>{this.convertDate(selectedWorkout.attributes.workout_date)}</Text>
                 <FlatList 
-                    data={selectedWorkout.exercises}
+                    data={selectedWorkout.attributes.exercises}
                     renderItem={({item}) => (
                         <Card exerciseData={item} onSetPress={this.onSetPress}/>
                     )}
                     keyExtractor={(item) => item.id.toString() + 'WD'}/>
-                <TouchableOpacity style={styles.saveButton} onPress={() => this.saveWorkout(navigation, selectedWorkout)}>
+                <TouchableOpacity style={styles.saveButton} onPress={() => this.saveWorkout(navigation, selectedWorkout.attributes)}>
                     <Text style={styles.saveText}>Save your Progress</Text>
                 </TouchableOpacity>
             </View>  
