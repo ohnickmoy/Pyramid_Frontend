@@ -1,9 +1,8 @@
 import { getNextWorkout } from '../helpers/workoutAlgoHelpers'
+import constants from '../variables'
 
-const NGROK = '148cfa58.ngrok.io'
-
-const USER_API = `http://${NGROK}/api/v1/users/`
-const WORKOUT_API = `http://${NGROK}/api/v1/workouts/`
+const USER_API = `http://${constants.NGROK}/api/v1/users/`
+const WORKOUT_API = `http://${constants.NGROK}/api/v1/workouts/`
 
 export function fetchWorkoutsBegin(){
     return {
@@ -24,9 +23,7 @@ export function fetchWorkouts(id){
         fetch(`${USER_API}${id}/workouts`)
             .then(res => res.json())
             .then(data => {
-                //let workouts = data.data.attributes.workouts.reverse()
                 let workouts = data.data.reverse()
-                console.log(workouts)
                 dispatch(setWorkouts(workouts))
             })
     }
@@ -98,9 +95,7 @@ export function fetchSaveWorkout(navigation, selectedWorkout){
         })
         .then(res => res.json())
         .then(data => {
-            console.log(data)
             let updatedWorkout = data.data.attributes
-            console.log(updatedWorkout)
             dispatch(saveWorkout(updatedWorkout))
         })
         .then(data => {

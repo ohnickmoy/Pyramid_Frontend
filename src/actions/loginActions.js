@@ -1,7 +1,7 @@
-const NGROK = '148cfa58.ngrok.io'
+import constants from '../variables'
 
-const LOGIN_API = `http://${NGROK}/api/v1/login`
-const SIGNUP_API = `http://${NGROK}/api/v1/signup`
+const LOGIN_API = `http://${constants.NGROK}/api/v1/login`
+const SIGNUP_API = `http://${constants.NGROK}/api/v1/signup`
 
 export function changeUsername(e){
     return {
@@ -31,7 +31,7 @@ export function setUser(userId){
     }
 }
 
-export function createUser(username, password){
+export function createUser(username, password, navigation){
     return function(dispatch){
         fetch(SIGNUP_API, {
             method: 'POST',
@@ -46,19 +46,20 @@ export function createUser(username, password){
         })
         .then(res=>res.json())
         .then(data => {
-            //in this portion, we received a user  and we're just logging it to the console
-            //in this portion we probably have to do a redirect using a navigator
-            //in this case, its the workouts screen
-            console.log(data)
+            dispatch(setUser(data.data.id))
             if(data.errors){
                 alert(data.errors[0])
             }
+        })
+        .then(data => {
+            navigation.navigate('App')
         })
     }
 }
 
 export function loginUser(username, password, navigation){
     console.log('hit it')
+    console.log(LOGIN_API)
     return function(dispatch){
         fetch(LOGIN_API, {
             method: 'POST',
