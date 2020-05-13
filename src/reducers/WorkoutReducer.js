@@ -15,8 +15,8 @@ function workoutReducer(prevState = init_state, action){
             return {...prevState, loading: false, workoutHistory: action.payload.workouts}
         case 'UPDATE_SET_REPS':
             let updatedSelectedWorkout = {...prevState.selectedWorkout}
-            let exercise = updatedSelectedWorkout.exercises.find(exercise => exercise.id === action.payload.exerciseId)
-            let exerciseIndex = updatedSelectedWorkout.exercises.findIndex(exercise => exercise.id === action.payload.exerciseId)
+            let exercise = updatedSelectedWorkout.attributes.exercises.find(exercise => exercise.id === action.payload.exerciseId)
+            let exerciseIndex = updatedSelectedWorkout.attributes.exercises.findIndex(exercise => exercise.id === action.payload.exerciseId)
             
             let newValue = ''
             let v  = exercise.setInfo[action.payload.exerciseSetIndex]
@@ -29,7 +29,7 @@ function workoutReducer(prevState = init_state, action){
             else{
                 newValue = `${parseInt(v) - 1}`
             }
-            updatedSelectedWorkout.exercises[exerciseIndex].setInfo[action.payload.exerciseSetIndex] = newValue
+            updatedSelectedWorkout.attributes.exercises[exerciseIndex].setInfo[action.payload.exerciseSetIndex] = newValue
             return {...prevState, selectedWorkout: updatedSelectedWorkout}
         case 'SET_DISPLAYED_WORKOUT':
             const {workoutHistory} = prevState

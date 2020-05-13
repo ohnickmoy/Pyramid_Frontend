@@ -6,14 +6,14 @@ import imageLogo from '../../assets/images/pyramid_app_icon.png'
 import { changeUsername, changePassword, changePasswordVerify, createUser } from '../actions/loginActions'
 
 class SignupScreen extends React.Component{
-    handleSignUpPress =() => {
+    handleSignUpPress =(navigation) => {
         console.log('Sign up button pressed')
         if(this.props.passwordVerify !== this.props.password)
             return alert('Passwords do not match')
         else if(!this.props.username || !this.props.password || !this.props.passwordVerify)
             return alert('Please complete the full form')
         else
-            this.props.createUser(this.props.username, this.props.password)
+            this.props.createUser(this.props.username, this.props.password, navigation)
     }
 
     render(){
@@ -58,7 +58,7 @@ class SignupScreen extends React.Component{
                     </View>
                     <TouchableOpacity 
                         style={styles.signUpBtn}
-                        onPress={this.handleSignUpPress}
+                        onPress={() => this.handleSignUpPress(this.props.navigation)}
                     >
                         <Text style={styles.signUpText}>Create your account</Text>
                     </TouchableOpacity>

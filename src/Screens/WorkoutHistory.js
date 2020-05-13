@@ -41,11 +41,11 @@ class WorkoutHistory extends React.Component{
                     renderItem={({item}) => (
                         <TouchableOpacity style={styles.item} activeOpacity={1} onPress={() => this.goToDetails(navigation, item.id)}>
                             <View style={styles.topRow}>
-                                <Text style={styles.cardText}>{this.convertDate(item.workout_date)}</Text>
-                                <Text style={styles.cardText}>Workout Type: {item.routine_type}</Text>
+                                <Text style={styles.cardText}>{this.convertDate(item.attributes.workout_date)}</Text>
+                                <Text style={styles.cardText}>Workout Type: {item.attributes.routine_type}</Text>
                             </View>
                             <View style={styles.bottomRow}>
-                                {item.exercises.map((exercise, index) => {
+                                {item.attributes.exercises.map((exercise, index) => {
                                     return(
                                         <View style={styles.exerciseRow} key={exercise + index}>
                                             <Text style={styles.setRepText}>{exercise.name}</Text>

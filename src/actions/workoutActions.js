@@ -1,9 +1,8 @@
 import { getNextWorkout } from '../helpers/workoutAlgoHelpers'
+import constants from '../variables'
 
-const NGROK = 'c0c6e5f4.ngrok.io'
-
-const TEST_API = `http://${NGROK}/api/v1/users/`
-const WORKOUT_API = `http://${NGROK}/api/v1/workouts/`
+const USER_API = `http://${constants.NGROK}/api/v1/users/`
+const WORKOUT_API = `http://${constants.NGROK}/api/v1/workouts/`
 
 export function fetchWorkoutsBegin(){
     return {
@@ -21,11 +20,10 @@ export function setWorkouts(workouts){
 export function fetchWorkouts(id){
     return function(dispatch){
         dispatch(fetchWorkoutsBegin())
-        console.log(`${TEST_API}${id}`)
-        fetch(`${TEST_API}${id}`)
+        fetch(`${USER_API}${id}/workouts`)
             .then(res => res.json())
             .then(data => {
-                let workouts = data.data.attributes.workouts.reverse()
+                let workouts = data.data.reverse()
                 dispatch(setWorkouts(workouts))
             })
     }
@@ -63,7 +61,7 @@ export function displayCreatedWorkout(createdWorkout){
 export function createNextWorkout(workoutHistory, navigation){
     let nextWorkout = getNextWorkout([...workoutHistory])
     return function(dispatch){
-        fetch(TEST_API + '/nextworkout', {
+        fetch(USER_API + '/nextworkout', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -84,6 +82,8 @@ export function createNextWorkout(workoutHistory, navigation){
 }
 
 export function fetchSaveWorkout(navigation, selectedWorkout){
+    console.log(`${WORKOUT_API}${selectedWorkout.id}/saveworkout`)
+    console.log(selectedWorkout)
     return function(dispatch){
         fetch(WORKOUT_API + `${selectedWorkout.id}/saveworkout`, {
             method: 'PATCH',
