@@ -6,7 +6,6 @@ import { connect } from 'react-redux'
 class WorkoutHistory extends React.Component{
     
     componentDidMount(){
-        console.log(this.props.id, 'id')
         this.props.fetchWorkouts(this.props.id)
     }
 
@@ -21,19 +20,19 @@ class WorkoutHistory extends React.Component{
         return convertedDate + ' - ' + convertedTime
     }
 
-    getNextWorkout = (workoutHistory, navigation) => {
-        this.props.createNextWorkout(workoutHistory, navigation)
+    getNextWorkout = (workoutHistory, navigation, id) => {
+        this.props.createNextWorkout(workoutHistory, navigation, id)
     }
 
     render(){
-        const {loading, workoutHistory, navigation} = this.props
+        const {loading, workoutHistory, navigation, id} = this.props
         if(loading){
             return <Text style={styles.headerText}>Loading...</Text>
         }
         return (
             <View style={styles.container}>
                 <StatusBar barStyle="light-content" backgroundColor="#15324A" />
-                <TouchableOpacity style={styles.saveButton} onPress={() => this.getNextWorkout(workoutHistory, navigation)}>
+                <TouchableOpacity style={styles.saveButton} onPress={() => this.getNextWorkout(workoutHistory, navigation, id)}>
                     <Text style={styles.saveText}>Start your next workout</Text>
                 </TouchableOpacity>
                 <FlatList 
@@ -86,8 +85,6 @@ export default connect(mapStateToProps, mapDispatchToProps)(WorkoutHistory)
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        //marginHorizontal: 10
-        //backgroundColor: 'black'
     },
     topRow: {
         flexDirection: 'row',
@@ -106,7 +103,6 @@ const styles = StyleSheet.create({
     setRepData: {
         flexDirection: 'row',
         justifyContent: 'space-evenly'
-        // alignSelf:'flex-end'
     },
     item: {
         marginTop: 10,

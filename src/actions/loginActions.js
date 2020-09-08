@@ -58,8 +58,6 @@ export function createUser(username, password, navigation){
 }
 
 export function loginUser(username, password, navigation){
-    console.log('hit it')
-    console.log(LOGIN_API)
     return function(dispatch){
         fetch(LOGIN_API, {
             method: 'POST',

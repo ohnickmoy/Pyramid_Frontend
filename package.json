@@ -13,6 +13,7 @@
     "deepcopy": "^2.0.0",
     "expo": "~36.0.0",
     "jwt-decode": "^2.2.0",
+    "logkitty": "^0.7.1",
     "moment": "^2.24.0",
     "prop-types": "^15.7.2",
     "react": "~16.9.0",

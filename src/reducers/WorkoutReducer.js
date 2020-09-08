@@ -1,5 +1,3 @@
-// import { getNextWorkout } from '../helpers/workoutAlgoHelpers'
-
 const init_state = {
     workoutHistory: [],
     loading: false,
@@ -7,7 +5,6 @@ const init_state = {
 }
 
 function workoutReducer(prevState = init_state, action){
-    //console.log('in reducer',action.payload)
     switch(action.type){
         case 'FETCH_WORKOUTS_BEGIN':
             return {...prevState, loading: true}

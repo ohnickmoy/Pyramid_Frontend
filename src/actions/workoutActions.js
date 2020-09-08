@@ -58,10 +58,10 @@ export function displayCreatedWorkout(createdWorkout){
     }
 }
 
-export function createNextWorkout(workoutHistory, navigation){
+export function createNextWorkout(workoutHistory, navigation, id){
     let nextWorkout = getNextWorkout([...workoutHistory])
     return function(dispatch){
-        fetch(USER_API + '/nextworkout', {
+        fetch(`${USER_API}${id}/nextworkout`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -71,7 +71,8 @@ export function createNextWorkout(workoutHistory, navigation){
         })
         .then(res => res.json())
         .then(data => {
-            let createdWorkout = data.data.attributes
+            let createdWorkout = data.data
+            console.log("Created Workout", createdWorkout)
             dispatch(displayCreatedWorkout(createdWorkout))
         })
         .then(data => {

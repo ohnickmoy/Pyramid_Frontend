@@ -36,9 +36,9 @@ class ExerciseCharts extends React.Component{
     getExercisebyType = (type) => {
         let exercises = []; 
         exercises = this.props.workoutHistory.reduce((accumulator, workout) => {
-            workout.exercises.forEach(exercise => {
+            workout.attributes.exercises.forEach(exercise => {
                 if(exercise.name === type){
-                    exercise.workout_date = workout.workout_date
+                    exercise.workout_date = workout.attributes.workout_date
                     accumulator.push(exercise)
                 }
             })
@@ -76,6 +76,5 @@ export default connect(mapStateToProps)(ExerciseCharts)
 const styles = StyleSheet.create({
     container: {
         marginTop: 10,
-        //marginHorizontal: 5
     },
 })

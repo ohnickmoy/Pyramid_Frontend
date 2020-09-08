@@ -7,7 +7,6 @@ import { TouchableOpacity } from 'react-native-gesture-handler'
 
 class LoginScreen extends React.Component{
     handleLoginPress = (navigation) => {
-        //console.log(username, password)
         if(!this.props.username || !this.props.password){
             return alert('Please complete the full form')
         }

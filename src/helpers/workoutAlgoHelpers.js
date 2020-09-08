@@ -34,7 +34,7 @@ const default_workout = {
 }
 
 const getNextRoutineType = (lastWorkout) => {
-    switch(lastWorkout.routine_type){
+    switch(lastWorkout.attributes.routine_type){
         case 'A1':
             return 'B1'
         case 'B1':
@@ -219,7 +219,6 @@ export function getNextWorkout(workoutHistory){
     else { 
         //means that instance of whatever next workout does in fact exist 
         let lastInstanceOfNextWorkoutType = filteredWorkoutHistory[0]
-
         nextWorkout = doProgressionProtocol(nextWorkout, lastInstanceOfNextWorkoutType)
 
     }

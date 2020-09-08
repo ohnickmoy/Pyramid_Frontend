@@ -13,7 +13,6 @@ class WorkoutDetails extends React.Component{
     }
 
     onSetPress = (exerciseSetIndex, reps, exerciseId) => {
-        //console.log(exerciseSetIndex, reps, exerciseId)
         this.props.updateSetsReps(exerciseSetIndex, reps, exerciseId)
     }
 
@@ -23,7 +22,7 @@ class WorkoutDetails extends React.Component{
 
     render(){
         const {selectedWorkout, navigation} = this.props
-        //console.log(selectedWorkout)
+        console.log("Selected Workout",selectedWorkout)
         return (
             <View style={styles.container}>
             <StatusBar barStyle="light-content" backgroundColor="#15324A" />
@@ -58,7 +57,6 @@ export default connect(mapStateToProps, mapDispatchToProps)(WorkoutDetails)
 
 const styles = StyleSheet.create({
     container:{
-        //margin: 10
     },
     headerText: {
         fontWeight: 'bold',
